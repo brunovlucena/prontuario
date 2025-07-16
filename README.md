@@ -386,60 +386,51 @@ flowchart TD
 ## 🧠 HOSPITAL-WIDE AI PROCESSING
 
 ```mermaid
-flowchart TB
-    subgraph "🏥 HOSPITAL REQUEST LAYER"
-        HR[🏥 HOSPITAL USERS<br/><br/>3000+ CONCURRENT DOCTORS<br/>MULTI-DEPARTMENT ACCESS<br/><br/>🚨 Emergency | ❤️ Cardiology<br/>🔪 Surgery | 🏥 ICU]
-    end
+flowchart TD
+    HospitalUsers["🏥 HOSPITAL USERS<br/>3000+ CONCURRENT DOCTORS<br/>Emergency | Cardiology | Surgery | ICU"]
     
-    subgraph "⚖️ LOAD BALANCING"
-        LB[⚖️ ENTERPRISE LOAD BALANCER<br/><br/>GEOGRAPHIC DEPARTMENT ROUTING<br/>M4 MAX CLUSTER MANAGEMENT<br/><br/>📊 Real-time load distribution]
-    end
+    LoadBalancer["⚖️ ENTERPRISE LOAD BALANCER<br/>Geographic Department Routing<br/>M4 MAX Cluster Management"]
     
-    subgraph "🖥️ DEPARTMENT AI CLUSTERS"
-        EA[🚨 EMERGENCY AI<br/><br/>Mac Studio M4 Ultra x2<br/>CRITICAL CASE PROCESSING<br/><br/>⚡ 25,000 tokens/sec]
-        CA[❤️ CARDIOLOGY AI<br/><br/>Mac Studio M4 Max x2<br/>CARDIAC PROTOCOLS<br/><br/>📈 15,000 tokens/sec]
-        SA[🔪 SURGERY AI<br/><br/>Mac Studio M4 Max x2<br/>SURGICAL WORKFLOWS<br/><br/>📈 15,000 tokens/sec]
-        IA[🏥 ICU AI<br/><br/>Mac Pro M4 Ultra x1<br/>CRITICAL CARE<br/><br/>⚡ 30,000 tokens/sec]
-    end
+    EmergencyAI["🚨 EMERGENCY AI<br/>Mac Studio M4 Ultra x2<br/>25,000 tokens/sec"]
+    CardiologyAI["❤️ CARDIOLOGY AI<br/>Mac Studio M4 Max x2<br/>15,000 tokens/sec"]
+    SurgeryAI["🔪 SURGERY AI<br/>Mac Studio M4 Max x2<br/>15,000 tokens/sec"]
+    ICUAI["🏥 ICU AI<br/>Mac Pro M4 Ultra x1<br/>30,000 tokens/sec"]
     
-    subgraph "🧠 CORE AI SERVICES"
-        MG[🧠 MEDGEMMA MODEL<br/><br/>MEDICAL CONVERSATION AI<br/>MULTI-LANGUAGE SUPPORT<br/><br/>🌍 Portuguese + English]
-        DI[💊 DRUG INTERACTION<br/><br/>HOSPITAL FORMULARY<br/>REAL-TIME CHECKING<br/><br/>⚠️ Safety alerts]
-        PA[📋 PROTOCOL ENGINE<br/><br/>HOSPITAL GUIDELINES<br/>EVIDENCE-BASED<br/><br/>📚 SUS protocols]
-    end
+    MedGemma["🧠 MEDGEMMA MODEL<br/>Medical Conversation AI<br/>Portuguese + English"]
+    DrugInteraction["💊 DRUG INTERACTION<br/>Hospital Formulary<br/>Real-time Safety Alerts"]
+    ProtocolEngine["📋 PROTOCOL ENGINE<br/>Hospital Guidelines<br/>SUS Protocols"]
     
-    subgraph "📊 HOSPITAL INTEGRATION"
-        RM[🔄 RESPONSE MERGER<br/><br/>MULTI-DEPARTMENT SYNTHESIS<br/>CROSS-DEPARTMENT ALERTS<br/><br/>🔔 Real-time coordination]
-        EMR[📊 EMR INTEGRATION<br/><br/>BIDIRECTIONAL SYNC<br/>LEGACY SYSTEM SUPPORT<br/><br/>🔗 HL7 FHIR + APIs]
-    end
+    ResponseMerger["🔄 RESPONSE MERGER<br/>Multi-department Synthesis<br/>Cross-department Alerts"]
+    EMRIntegration["📊 EMR INTEGRATION<br/>Bidirectional Sync<br/>HL7 FHIR + APIs"]
 
-    HR --> LB
-    LB --> EA
-    LB --> CA
-    LB --> SA
-    LB --> IA
+    HospitalUsers --> LoadBalancer
     
-    EA --> MG
-    CA --> MG
-    SA --> MG
-    IA --> MG
+    LoadBalancer --> EmergencyAI
+    LoadBalancer --> CardiologyAI
+    LoadBalancer --> SurgeryAI
+    LoadBalancer --> ICUAI
     
-    MG --> DI
-    DI --> PA
-    PA --> RM
-    RM --> EMR
+    EmergencyAI --> MedGemma
+    CardiologyAI --> MedGemma
+    SurgeryAI --> MedGemma
+    ICUAI --> MedGemma
+    
+    MedGemma --> DrugInteraction
+    DrugInteraction --> ProtocolEngine
+    ProtocolEngine --> ResponseMerger
+    ResponseMerger --> EMRIntegration
 
-    style HR fill:#1565C0,stroke:#0D47A1,stroke-width:6px,color:#fff,font-size:16px
-    style LB fill:#2E7D32,stroke:#1B5E20,stroke-width:5px,color:#fff,font-size:16px
-    style EA fill:#C62828,stroke:#B71C1C,stroke-width:5px,color:#fff,font-size:16px
-    style CA fill:#AD1457,stroke:#880E4F,stroke-width:5px,color:#fff,font-size:16px
-    style SA fill:#6A1B9A,stroke:#4A148C,stroke-width:5px,color:#fff,font-size:16px
-    style IA fill:#1565C0,stroke:#0D47A1,stroke-width:5px,color:#fff,font-size:16px
-    style MG fill:#00695C,stroke:#004D40,stroke-width:6px,color:#fff,font-size:16px
-    style DI fill:#F57C00,stroke:#E65100,stroke-width:5px,color:#fff,font-size:16px
-    style PA fill:#5D4037,stroke:#3E2723,stroke-width:5px,color:#fff,font-size:16px
-    style RM fill:#37474F,stroke:#263238,stroke-width:5px,color:#fff,font-size:16px
-    style EMR fill:#795548,stroke:#5D4037,stroke-width:5px,color:#fff,font-size:16px
+    style HospitalUsers fill:#1565C0,stroke:#0D47A1,stroke-width:4px,color:#fff
+    style LoadBalancer fill:#2E7D32,stroke:#1B5E20,stroke-width:4px,color:#fff
+    style EmergencyAI fill:#C62828,stroke:#B71C1C,stroke-width:3px,color:#fff
+    style CardiologyAI fill:#AD1457,stroke:#880E4F,stroke-width:3px,color:#fff
+    style SurgeryAI fill:#6A1B9A,stroke:#4A148C,stroke-width:3px,color:#fff
+    style ICUAI fill:#1565C0,stroke:#0D47A1,stroke-width:3px,color:#fff
+    style MedGemma fill:#00695C,stroke:#004D40,stroke-width:4px,color:#fff
+    style DrugInteraction fill:#F57C00,stroke:#E65100,stroke-width:3px,color:#fff
+    style ProtocolEngine fill:#5D4037,stroke:#3E2723,stroke-width:3px,color:#fff
+    style ResponseMerger fill:#37474F,stroke:#263238,stroke-width:3px,color:#fff
+    style EMRIntegration fill:#795548,stroke:#5D4037,stroke-width:3px,color:#fff
 ```
 
 ---
@@ -468,43 +459,31 @@ flowchart TB
 ## 🔐 SIMPLE AUTHENTICATION (MVP)
 
 ```mermaid
-flowchart TB
-    subgraph "👩‍⚕️ DOCTOR AUTHENTICATION"
-        DL[👩‍⚕️ DOCTOR LOGIN<br/><br/>USERNAME + PASSWORD<br/>SIMPLE CREDENTIALS<br/><br/>🔐 Basic authentication]
-    end
+flowchart TD
+    DoctorLogin["👩‍⚕️ DOCTOR LOGIN<br/>Username + Password<br/>Simple Credentials"]
     
-    subgraph "🔐 SIMPLE LOGIN"
-        SimpleAuth[🔐 SIMPLE LOGIN<br/><br/>USERNAME/PASSWORD ONLY<br/>NO COMPLEX INTEGRATIONS<br/><br/>📱 Mobile-first approach]
-    end
+    SimpleAuth["🔐 SIMPLE LOGIN<br/>Username/Password Only<br/>No Complex Integrations"]
     
-    subgraph "👥 ACCESS CONTROL"
-        RBAC[👥 ROLE-BASED ACCESS<br/><br/>ATTENDING | RESIDENT<br/>NURSE | ADMIN<br/><br/>🏢 Department permissions]
-    end
+    RoleAccess["👥 ROLE-BASED ACCESS<br/>Attending | Resident | Nurse | Admin<br/>Department Permissions"]
     
-    subgraph "🏢 DEPARTMENT SECURITY"
-        DS[🏢 DEPARTMENT ISOLATION<br/><br/>CARDIOLOGY | EMERGENCY<br/>SURGERY | ICU<br/><br/>🔒 Data isolation + audit]
-    end
+    DeptSecurity["🏢 DEPARTMENT ISOLATION<br/>Cardiology | Emergency | Surgery | ICU<br/>Data Isolation + Audit"]
     
-    subgraph "📋 COMPLIANCE"
-        HIPAA[📋 HIPAA AUDIT SYSTEM<br/><br/>COMPLETE ACCESS LOGGING<br/>REGULATORY COMPLIANCE<br/><br/>📊 Real-time monitoring]
-    end
+    Compliance["📋 HIPAA AUDIT SYSTEM<br/>Complete Access Logging<br/>Regulatory Compliance"]
     
-    subgraph "🕒 SESSION MANAGEMENT"
-        SM[🕒 SESSION CONTROL<br/><br/>DEPARTMENT TIMEOUTS<br/>CONCURRENT LIMITS<br/><br/>⏰ Auto-logout policies]
-    end
+    SessionMgmt["🕒 SESSION CONTROL<br/>Department Timeouts<br/>Auto-logout Policies"]
 
-    DL --> SimpleAuth
-    SimpleAuth --> RBAC
-    RBAC --> DS
-    DS --> HIPAA
-    HIPAA --> SM
+    DoctorLogin --> SimpleAuth
+    SimpleAuth --> RoleAccess
+    RoleAccess --> DeptSecurity
+    DeptSecurity --> Compliance
+    Compliance --> SessionMgmt
 
-    style DL fill:#2E7D32,stroke:#1B5E20,stroke-width:6px,color:#fff,font-size:16px
-    style SimpleAuth fill:#1565C0,stroke:#0D47A1,stroke-width:5px,color:#fff,font-size:16px
-    style RBAC fill:#F57C00,stroke:#E65100,stroke-width:5px,color:#fff,font-size:16px
-    style DS fill:#C62828,stroke:#B71C1C,stroke-width:5px,color:#fff,font-size:16px
-    style HIPAA fill:#6A1B9A,stroke:#4A148C,stroke-width:5px,color:#fff,font-size:16px
-    style SM fill:#37474F,stroke:#263238,stroke-width:5px,color:#fff,font-size:16px
+    style DoctorLogin fill:#2E7D32,stroke:#1B5E20,stroke-width:4px,color:#fff
+    style SimpleAuth fill:#1565C0,stroke:#0D47A1,stroke-width:4px,color:#fff
+    style RoleAccess fill:#F57C00,stroke:#E65100,stroke-width:3px,color:#fff
+    style DeptSecurity fill:#C62828,stroke:#B71C1C,stroke-width:3px,color:#fff
+    style Compliance fill:#6A1B9A,stroke:#4A148C,stroke-width:3px,color:#fff
+    style SessionMgmt fill:#37474F,stroke:#263238,stroke-width:3px,color:#fff
 ```
 
 ---
@@ -514,47 +493,35 @@ flowchart TB
 ## 📊 HOSPITAL SYSTEM INTEGRATION
 
 ```mermaid
-flowchart TB
-    subgraph "🏥 HOSPITAL EMR"
-        EMR[🏥 HOSPITAL EMR SYSTEM<br/><br/>EPIC | CERNER | ALLSCRIPTS<br/>LEGACY SYSTEM INTEGRATION<br/><br/>📊 Existing patient data]
-    end
+flowchart TD
+    HospitalEMR["🏥 HOSPITAL EMR SYSTEM<br/>Epic | Cerner | Allscripts<br/>Legacy System Integration"]
     
-    subgraph "🔄 INTEGRATION ENGINE"
-        IE[🔄 EMR INTEGRATION ENGINE<br/><br/>HL7 FHIR + CUSTOM APIs<br/>REAL-TIME BIDIRECTIONAL SYNC<br/><br/>⚡ <1 second latency]
-    end
+    IntegrationEngine["🔄 EMR INTEGRATION ENGINE<br/>HL7 FHIR + Custom APIs<br/>Real-time Bidirectional Sync"]
     
-    subgraph "📋 DATA PROCESSING"
-        DN[📋 DATA NORMALIZATION<br/><br/>MEDICAL TERMINOLOGY MAPPING<br/>CROSS-SYSTEM COMPATIBILITY<br/><br/>🔗 SNOMED CT + ICD-10]
-    end
+    DataNormalization["📋 DATA NORMALIZATION<br/>Medical Terminology Mapping<br/>SNOMED CT + ICD-10"]
     
-    subgraph "🤖 AI PROCESSING"
-        AIP[🤖 AI PROCESSING LAYER<br/><br/>M4 MAX CLUSTER PROCESSING<br/>MEDICAL AI ANALYSIS<br/><br/>🧠 MedGemma + protocols]
-    end
+    AIProcessing["🤖 AI PROCESSING LAYER<br/>M4 Max Cluster Processing<br/>MedGemma + Protocols"]
     
-    subgraph "📤 RESPONSE INTEGRATION"
-        RS[📤 RESPONSE INTEGRATION<br/><br/>AI INSIGHTS BACK TO EMR<br/>STRUCTURED MEDICAL NOTES<br/><br/>📝 SOAP format output]
-    end
+    ResponseIntegration["📤 RESPONSE INTEGRATION<br/>AI Insights Back to EMR<br/>SOAP Format Output"]
     
-    subgraph "📊 AUDIT & MONITORING"
-        IA[📊 INTEGRATION AUDIT<br/><br/>DATA FLOW MONITORING<br/>ERROR RESOLUTION TRACKING<br/><br/>🔍 Real-time status]
-    end
+    IntegrationAudit["📊 INTEGRATION AUDIT<br/>Data Flow Monitoring<br/>Real-time Status"]
 
-    EMR --> IE
-    IE --> DN
-    DN --> AIP
-    AIP --> RS
-    RS --> EMR
+    HospitalEMR --> IntegrationEngine
+    IntegrationEngine --> DataNormalization
+    DataNormalization --> AIProcessing
+    AIProcessing --> ResponseIntegration
+    ResponseIntegration --> HospitalEMR
     
-    IE --> IA
-    DN --> IA
-    RS --> IA
+    IntegrationEngine --> IntegrationAudit
+    DataNormalization --> IntegrationAudit
+    ResponseIntegration --> IntegrationAudit
 
-    style EMR fill:#1565C0,stroke:#0D47A1,stroke-width:6px,color:#fff,font-size:16px
-    style IE fill:#2E7D32,stroke:#1B5E20,stroke-width:5px,color:#fff,font-size:16px
-    style DN fill:#F57C00,stroke:#E65100,stroke-width:5px,color:#fff,font-size:16px
-    style AIP fill:#00695C,stroke:#004D40,stroke-width:5px,color:#fff,font-size:16px
-    style RS fill:#6A1B9A,stroke:#4A148C,stroke-width:5px,color:#fff,font-size:16px
-    style IA fill:#37474F,stroke:#263238,stroke-width:5px,color:#fff,font-size:16px
+    style HospitalEMR fill:#1565C0,stroke:#0D47A1,stroke-width:4px,color:#fff
+    style IntegrationEngine fill:#2E7D32,stroke:#1B5E20,stroke-width:4px,color:#fff
+    style DataNormalization fill:#F57C00,stroke:#E65100,stroke-width:3px,color:#fff
+    style AIProcessing fill:#00695C,stroke:#004D40,stroke-width:3px,color:#fff
+    style ResponseIntegration fill:#6A1B9A,stroke:#4A148C,stroke-width:3px,color:#fff
+    style IntegrationAudit fill:#37474F,stroke:#263238,stroke-width:3px,color:#fff
 ```
 
 ---
