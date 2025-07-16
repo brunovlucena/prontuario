@@ -90,7 +90,32 @@ Esta seção delineia casos de uso abrangentes para a plataforma médica Prontu�
 - **📊 Supervisão Administrativa**: Métricas hospitalares e gestão de recursos
 - **🤖 Inteligência Compartilhada**: Insights de IA acessíveis em todos os departamentos
 
-**Fluxo Típico**: Login → Selecionar Departamento → Ver Lista Pacientes → Iniciar Rounds por Voz → Documentar → Alertas Automáticos
+### Fluxo Visual - Rounds Matinais
+
+```
+┌─────────────────────────────────────┐
+│ 🔄 FLUXO ROUNDS MATINAIS (07:00)    │
+├─────────────────────────────────────┤
+│                                     │
+│ 🔐 Login                            │
+│  │                                  │
+│  ▼                                  │
+│ 🏢 Selecionar Departamento          │
+│  │                                  │
+│  ▼                                  │
+│ 👥 Ver Lista Pacientes              │
+│  │                                  │
+│  ▼                                  │
+│ 🎤 Iniciar Rounds por Voz           │
+│  │                                  │
+│  ▼                                  │
+│ 📝 Documentar                       │
+│  │                                  │
+│  ▼                                  │
+│ 🔔 Alertas Automáticos              │
+│                                     │
+└─────────────────────────────────────┘
+```
 
 ---
 
@@ -166,7 +191,33 @@ Esta seção delineia casos de uso abrangentes para a plataforma médica Prontu�
 - **🤖 Assistência Médica Básica**: Sugestões simples de tratamento
 - **📝 Notas Simplificadas**: Suporte documentação estruturada
 
-**Fluxo Típico**: Admissão Emergência → EMR Sync Automático → Alertas Multi-Departamentais → Coordenação Protocolos → Documentação Tempo Real
+### Fluxo Visual - Emergência Crítica
+
+```
+┌─────────────────────────────────────┐
+│ 🚨 FLUXO EMERGÊNCIA CRÍTICA         │
+├─────────────────────────────────────┤
+│                                     │
+│ 🚑 Admissão Emergência              │
+│  │                                  │
+│  ▼                                  │
+│ 📋 EMR Sync Automático              │
+│  │                                  │
+│  ▼                                  │
+│ 🔔 Alertas Multi-Departamentais     │
+│  │                                  │
+│  ├─► ❤️ Cardiologia                │
+│  ├─► 🏥 UTI                        │
+│  └─► 🔪 Cirurgia                   │
+│                                     │
+│  ▼                                  │
+│ 📊 Coordenação Protocolos           │
+│  │                                  │
+│  ▼                                  │
+│ 📝 Documentação Tempo Real          │
+│                                     │
+└─────────────────────────────────────┘
+```
 
 ---
 
@@ -276,7 +327,35 @@ Esta seção delineia casos de uso abrangentes para a plataforma médica Prontu�
 - 📱 **Touch-friendly** zoom e pan para dispositivos móveis
 - ⚠️ **Marcadores alerta** para valores fora da faixa destacados no gráfico
 
-**Fluxo Típico**: Selecionar Paciente → Upload/Entrada Labs → Análise IA Automática → Chat por Voz → Prescrição → Notificação Paciente
+### Fluxo Visual - Revisão Labs
+
+```
+┌─────────────────────────────────────┐
+│ 🔬 FLUXO REVISÃO LABORATORIAL       │
+├─────────────────────────────────────┤
+│                                     │
+│ 👤 Selecionar Paciente              │
+│  │                                  │
+│  ▼                                  │
+│ 📄 Upload/Entrada Labs              │
+│  │                                  │
+│  ▼                                  │
+│ 🤖 Análise IA Automática            │
+│  │                                  │
+│  ▼                                  │
+│ 📈 Gráficos + Tendências            │
+│  │                                  │
+│  ▼                                  │
+│ 🎤 Chat por Voz                     │
+│  │                                  │
+│  ▼                                  │
+│ 💊 Prescrição                       │
+│  │                                  │
+│  ▼                                  │
+│ 📱 Notificação Paciente             │
+│                                     │
+└─────────────────────────────────────┘
+```
 
 ---
 
@@ -366,7 +445,32 @@ Esta seção delineia casos de uso abrangentes para a plataforma médica Prontu�
 - **💾 Armazenamento Simples**: Gestão básica de registros com controle de versão
 - **⏱️ Economia de Tempo**: Redução de 15min para 3min na documentação
 
-**Fluxo Típico**: Abrir Paciente → Gravar por Voz → IA Transcreve → Revisar/Editar → Estruturar Automaticamente → Salvar
+### Fluxo Visual - Documentação
+
+```
+┌─────────────────────────────────────┐
+│ 📝 FLUXO DOCUMENTAÇÃO CONSULTA      │
+├─────────────────────────────────────┤
+│                                     │
+│ 👩‍⚕️ Abrir Paciente                  │
+│  │                                  │
+│  ▼                                  │
+│ 🎤 Gravar por Voz                   │
+│  │                                  │
+│  ▼                                  │
+│ 🤖 IA Transcreve                    │
+│  │                                  │
+│  ▼                                  │
+│ ✏️ Revisar/Editar                   │
+│  │                                  │
+│  ▼                                  │
+│ 📋 Estruturar Automaticamente       │
+│  │                                  │
+│  ▼                                  │
+│ 💾 Salvar                           │
+│                                     │
+└─────────────────────────────────────┘
+```
 
 ---
 
@@ -393,4 +497,29 @@ Esta seção delineia casos de uso abrangentes para a plataforma médica Prontu�
 | **🔬 Labs** | Endocrinologistas | Análise IA + gráficos | 60% revisão |
 | **📝 Documentação** | Clínica geral | Transcrição por voz | 80% escrita |
 
-Casos de uso com interfaces visuais realistas e fluxos práticos para Hospital Real Português! 🏥✨
+### Fluxo Visual - ROI Hospitalar
+
+```
+┌─────────────────────────────────────┐
+│ 💰 IMPACTO FINANCEIRO ANUAL         │
+├─────────────────────────────────────┤
+│                                     │
+│ 💸 CUSTOS REDUZIDOS:                │
+│  ├─► ⏱️ Tempo Médicos: R$ 180k      │
+│  ├─► 📋 Documentação: R$ 95k        │
+│  ├─► 🔔 Coordenação: R$ 65k         │
+│  └─► ⚠️ Erros Evitados: R$ 120k     │
+│                                     │
+│  = 💰 ECONOMIA TOTAL: R$ 460k       │
+│                                     │
+│ 📈 BENEFÍCIOS ADICIONAIS:           │
+│  ├─► 👨‍⚕️ Satisfação Médicos +15%    │
+│  ├─► 🎯 Precisão Diagnóstica +12%   │
+│  └─► ⚡ Resposta Emergência +75%    │
+│                                     │
+│ 🎯 ROI: 23% redução custos          │
+│                                     │
+└─────────────────────────────────────┘
+```
+
+Casos de uso com identidade ASCII visual consistente e fluxos práticos para Hospital Real Português! 🏥✨
