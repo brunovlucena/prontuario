@@ -2,7 +2,7 @@
 
 ## 🏥 Resumo Executivo
 
-Prontuário é uma plataforma MVP de IA médica projetada para instituições médicas de médio a grande porte. A plataforma oferece uma interface de IA conversacional que permite que seus usuarios gerenciem eficientemente dados de pacientes entre múltiplos departamentos e especialistas.
+Prontuário é uma plataforma MVP de IA médica projetada para instituições médicas de médio a grande porte. A plataforma oferece uma interface de chat médico (inspirada em WhatsApp + Gemini + memOS) que permite que seus usuarios gerenciem eficientemente dados de pacientes entre múltiplos departamentos e especialistas.
 
 ## 🔗 Links para Documentação Adicional
 
@@ -10,14 +10,15 @@ Prontuário é uma plataforma MVP de IA médica projetada para instituições m�
 
 - **[README.md](./README.md)** - Documentação completa do produto, casos de uso e visão geral
 - **[ARCHITECTURE.md](./ARCHITECTURE.md)** - Arquitetura técnica híbrida local/cloud
-- **[USE-CASES.md](./USE-CASES.md)** - Arquitetura técnica híbrida local/cloud
+- **[DESIGN.md](./DESIGN.md)** - Interface híbrida WhatsApp + Gemini + memOS com wireframes
+- **[USE-CASES.md](./USE-CASES.md)** - Casos de uso e fluxos departamentais hospitalares
 ---
 
 ## 🎯 MVP
 
 ### 🤖 IA Médica Empresarial
 
-- **Conversas Naturais**: Interface de IA conversacional para dados de pacientes em todos os departamentos
+- **Conversas Naturais**: Interface chat médico (WhatsApp + Gemini + memOS) para dados de pacientes em todos os departamentos
 - **Documentação por Chat/Voz**: Documentação hospitalar moderna e hands-free durante o atendimento ao paciente
 - **Suporte à Decisão Clínica**: Recomendações baseadas em evidências com exames medicos e historico do paciente
 
@@ -38,12 +39,12 @@ Prontuário é uma plataforma MVP de IA médica projetada para instituições m�
 
 ### Benefícios Centrais
 
-- **🤖 Chat Médico Básico**: Interface conversacional simples para dados pacientes
+- **🤖 Chat Médico Básico**: Interface estilo WhatsApp + Gemini + memOS para dados pacientes
 - **📱 Mobile-First**: App iOS com autenticação usuário/senha
 - **🎤 Documentação por Voz**: Anotações hands-free com reconhecimento termos médicos
 - **📊 Análises Simples**: Tendência básica sinais vitais e resultados laboratoriais
 - **💊 Busca Medicamentos**: Informações básicas medicamentos e verificação interações
-- **📁 Cofre Documentos**: Upload e organização documentos PDF
+- **📁 Cofre Documentos**: Upload simples arquivos (PDF, imagens) - sem captura por câmera
 
 ### Simplicidade Técnica
 

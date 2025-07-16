@@ -2,7 +2,7 @@
 
 ## 🎯 Visão Geral da Arquitetura
 
-Prontuário utiliza uma arquitetura híbrida que combina processamento de IA local em Mac Minis com serviços em nuvem GCP, otimizada para dispositivos iPhone únicos e operações hospitalares de 200 usuários diários.
+Prontuário utiliza uma arquitetura híbrida que combina processamento de IA local em Mac Minis com serviços em nuvem GCP, otimizada para dispositivos iPhone únicos e operações hospitalares de usuários diários.
 
 ---
 
@@ -10,11 +10,11 @@ Prontuário utiliza uma arquitetura híbrida que combina processamento de IA loc
 
 ```mermaid
 flowchart TD
-    iPhone["📱 DISPOSITIVOS iPhone<br/>200 usuários diários<br/>Interface médica nativa"]
+    iPhone["📱 DISPOSITIVOS iPhone<br/>usuários diários<br/>Interface médica nativa"]
     
     LocalCluster["🖥️ CLUSTER K8S LOCAL<br/>3x Mac Mini M4<br/>Processamento IA On-Premise"]
     
-    GCPServices["☁️ SERVIÇOS GCP<br/>GKE | Cloud Storage | Cloud SQL<br/>Dados & Orquestração"]
+    GCPServices["☁️ SERVIÇOS GCP<br/>GKE + Pulumi | Cloud Storage | Cloud SQL<br/>Dados & Orquestração"]
 
     iPhone --> LocalCluster
     LocalCluster <--> GCPServices
@@ -83,7 +83,8 @@ flowchart TD
 
 | **Serviço GCP** | **Função** | **Configuração** |
 |-----------------|------------|------------------|
-| **🚀 GKE Autopilot** | **Orquestração Cloud** | **Multi-zona us-central1** |
+| **🏗️ Pulumi** | **Infraestrutura como Código** | **TypeScript/Python IaC** |
+| **⚙️ GKE Standard** | **Orquestração Cloud** | **Multi-zona us-central1** |
 | **🗄️ Cloud SQL** | **Banco Dados Principal** | **PostgreSQL 15, HA** |
 | **📦 Cloud Storage** | **Armazenamento Objetos** | **Multi-regional, HIPAA** |
 | **🔐 Secret Manager** | **Gestão Credenciais** | **Rotação automática** |
@@ -98,7 +99,7 @@ flowchart LR
     
     VPN["🔒 VPN SITE-TO-SITE<br/>WireGuard<br/>Conexão segura"]
     
-    GKE["☁️ GKE CLUSTER<br/>Autopilot<br/>Serviços Backend"]
+    GKE["☁️ GKE CLUSTER<br/>Standard managed<br/>Serviços Backend"]
     
     CloudSQL["🗄️ CLOUD SQL<br/>PostgreSQL<br/>Dados Principais"]
     
@@ -271,7 +272,7 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    UI["🖼️ SwiftUI INTERFACE<br/>Interface médica nativa<br/>Dark/Light mode"]
+    UI["🖼️ SwiftUI INTERFACE<br/>WhatsApp + Gemini + memOS design<br/>Chat conversacional médico"]
     
     Core["⚙️ CORE LAYER<br/>Swift<br/>Business Logic"]
     
@@ -281,20 +282,20 @@ flowchart TD
     
     Voice["🎤 VOICE MODULE<br/>Speech Framework<br/>Real-time transcription"]
     
-    Camera["📷 CAMERA MODULE<br/>AVFoundation<br/>Document scanning"]
+    FileUpload["📁 FILE UPLOAD MODULE<br/>DocumentPicker + URLSession<br/>Upload documentos/imagens"]
 
     UI --> Core
     Core --> Network
     Core --> Storage
     Core --> Voice
-    Core --> Camera
+    Core --> FileUpload
 
     style UI fill:#1565C0,stroke:#0D47A1,stroke-width:4px,color:#fff
     style Core fill:#2E7D32,stroke:#1B5E20,stroke-width:4px,color:#fff
     style Network fill:#F57C00,stroke:#E65100,stroke-width:3px,color:#fff
     style Storage fill:#C62828,stroke:#B71C1C,stroke-width:3px,color:#fff
     style Voice fill:#6A1B9A,stroke:#4A148C,stroke-width:3px,color:#fff
-    style Camera fill:#00695C,stroke:#004D40,stroke-width:3px,color:#fff
+    style FileUpload fill:#00695C,stroke:#004D40,stroke-width:3px,color:#fff
 ```
 
 ### **Features iPhone App**
@@ -302,11 +303,19 @@ flowchart TD
 | **Feature** | **Tecnologia** | **Descrição** |
 |-------------|----------------|---------------|
 | **🎤 Documentação por Voz** | **Speech + NLP** | **Transcrição médica em tempo real** |
-| **📱 Interface Médica** | **SwiftUI + HealthKit** | **UI otimizada para workflows médicos** |
+| **📱 Interface Médica** | **SwiftUI + HealthKit** | **Design WhatsApp + Gemini + memOS para chat médico** |
 | **🔒 Autenticação Biométrica** | **Face ID + Touch ID** | **Segurança máxima dispositivo** |
 | **📊 Visualização Dados** | **Charts + Core Graphics** | **Gráficos laboratório/sinais vitais** |
-| **📷 Scan Documentos** | **VisionKit + ML** | **OCR documentos médicos** |
-| **🔄 Sync Offline** | **Core Data + CloudKit** | **Funcionamento sem conexão** |
+
+### **Design de Interface Híbrida**
+
+A interface combina os melhores elementos de três paradigmas:
+
+| **Inspiração** | **Elementos Adotados** | **Aplicação Médica** |
+|----------------|------------------------|----------------------|
+| **💬 WhatsApp** | **Chat bubbles, threads, áudio** | **Conversas com IA médica, histórico pacientes** |
+| **🤖 Gemini** | **Respostas estruturadas, code blocks** | **Planos tratamento, protocolos médicos** |
+| **🧠 memOS** | **Interface limpa, foco cognitivo** | **Redução sobrecarga, workflow eficiente** |
 
 ---
 
@@ -356,6 +365,15 @@ flowchart LR
 | **🔍 Staging** | **GKE** | **Blue/Green** | **Manual approval** |
 | **🏥 Production** | **Híbrido** | **Canary** | **Automatic rollback** |
 
+### **Infraestrutura como Código - Pulumi**
+
+| **Componente** | **Linguagem** | **Responsabilidade** |
+|----------------|---------------|----------------------|
+| **🏗️ Infraestrutura GCP** | **TypeScript** | **GKE, Cloud SQL, Storage, IAM** |
+| **⚙️ Kubernetes Resources** | **Python** | **Namespaces, RBAC, NetworkPolicies** |
+| **🔐 Secrets & Configs** | **TypeScript** | **Secret Manager, ConfigMaps** |
+| **📊 Monitoring Stack** | **Python** | **Prometheus, Grafana, Alertmanager** |
+
 ---
 
 # 📊 OBSERVABILIDADE
@@ -396,9 +414,3 @@ flowchart TD
 ```
 
 ---
-
----
-
-**🏥 ARQUITETURA HÍBRIDA PARA MÁXIMA PERFORMANCE E COMPLIANCE**
-
-**📱 IPHONE-FIRST | 🖥️ K8S LOCAL | ☁️ GCP CLOUD**
