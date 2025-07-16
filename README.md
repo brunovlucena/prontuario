@@ -4,6 +4,13 @@
 
 Prontuário é uma plataforma MVP de IA médica projetada para instituições médicas de médio a grande porte. A plataforma oferece uma interface de IA conversacional que permite que seus usuarios gerenciem eficientemente dados de pacientes entre múltiplos departamentos e especialistas.
 
+## 🔗 Links para Documentação Adicional
+
+### **📋 Documentação Principal**
+
+- **[README.md](./README.md)** - Documentação completa do produto, casos de uso e visão geral
+- **[ARCHITECTURE.md](./ARCHITECTURE.md)** - Arquitetura técnica híbrida local/cloud
+- **[USE-CASES.md](./USE-CASES.md)** - Arquitetura técnica híbrida local/cloud
 ---
 
 ## 🎯 MVP
@@ -46,13 +53,3 @@ Prontuário é uma plataforma MVP de IA médica projetada para instituições m�
 - **Integração Simples**: Conectividade EMR básica
 
 ---
-
-# 📚 DOCUMENTOS RELACIONADOS
-
-## 🔗 Links para Documentação Adicional
-
-### **📋 Documentação Principal**
-
-- **[README.md](./README.md)** - Documentação completa do produto, casos de uso e visão geral
-- **[ARCHITECTURE.md](./ARCHITECTURE.md)** - Arquitetura técnica híbrida local/cloud
-- **[USE-CASES.md](./USE-CASES.md)** - Arquitetura técnica híbrida local/cloud
