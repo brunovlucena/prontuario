@@ -376,23 +376,29 @@ flowchart TD
     
     Loki["📝 LOKI<br/>Log aggregation<br/>LogQL queries"]
     
-    Jaeger["🔍 JAEGER<br/>Distributed tracing<br/>Performance analysis"]
+    Tempo["🔍 TEMPO<br/>Distributed tracing<br/>Performance analysis"]
 
     Apps --> Prometheus
     Apps --> Loki
-    Apps --> Jaeger
+    Apps --> Tempo
     
     Prometheus --> Grafana
     Prometheus --> AlertManager
     Loki --> Grafana
-    Jaeger --> Grafana
+    Tempo --> Grafana
 
     style Apps fill:#1565C0,stroke:#0D47A1,stroke-width:4px,color:#fff
     style Prometheus fill:#C62828,stroke:#B71C1C,stroke-width:4px,color:#fff
     style Grafana fill:#F57C00,stroke:#E65100,stroke-width:4px,color:#fff
     style AlertManager fill:#2E7D32,stroke:#1B5E20,stroke-width:3px,color:#fff
     style Loki fill:#6A1B9A,stroke:#4A148C,stroke-width:3px,color:#fff
-    style Jaeger fill:#00695C,stroke:#004D40,stroke-width:3px,color:#fff
+    style Tempo fill:#00695C,stroke:#004D40,stroke-width:3px,color:#fff
 ```
 
 ---
+
+---
+
+**🏥 ARQUITETURA HÍBRIDA PARA MÁXIMA PERFORMANCE E COMPLIANCE**
+
+**📱 IPHONE-FIRST | 🖥️ K8S LOCAL | ☁️ GCP CLOUD**
