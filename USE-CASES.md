@@ -239,7 +239,7 @@ flowchart TD
 
     ReviewEdit["👩‍⚕️ Médica Revisa e Edita<br/>Verificar transcrição IA<br/>Fazer correções necessárias<br/>Adicionar notas adicionais"]
 
-    BasicNote["📝 Nota SOAP Padrão<br/>Formato gerado:<br/>S: Achados subjetivos<br/>O: Exame objetivo<br/>A: Avaliação<br/>P: Plano"]
+    BasicNote["📝 Nota Médica Estruturada<br/>Formato organizado:<br/>Queixa principal<br/>Histórico clínico<br/>Exame físico<br/>Diagnóstico e plano"]
 
     SaveRecord["💾 Salvar no Prontuário Paciente<br/>Armazenar em arquivo paciente<br/>Controle versão básico<br/>Timestamp documentação"]
 
@@ -263,7 +263,7 @@ flowchart TD
 
 - **🎤 Entrada por Voz**: Documentação hands-free
 - **🤖 Processamento IA**: Reconhecimento básico termos médicos
-- **📝 Formato Padrão**: Geração nota SOAP
+- **📝 Formato Estruturado**: Notas médicas organizadas
 - **💾 Armazenamento Simples**: Gestão básica registros
 
 ---
