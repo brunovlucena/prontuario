@@ -98,75 +98,50 @@ flowchart TD
 
 ## 🗨️ Componentes de Interface
 
-### **Chat Bubble - Estilo WhatsApp Médico**
+### **Chat Bubble do Médico - Estilo WhatsApp**
 
-#### **Mensagem do Médico**
-```
-┌─────────────────────────────────────┐
-│ 👨‍⚕️ Dr. Silva • 14:32                │
-│ Prescreva Ibuprofeno 400mg para     │
-│ Maria Silva                         │
-│                              ✓✓ Lido │
-└─────────────────────────────────────┘
+```mermaid
+flowchart TD
+    DoctorBubble["👨‍⚕️ MENSAGEM DO MÉDICO<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>Dr. Silva • 14:32<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>Prescreva Ibuprofeno 400mg<br/>para Maria Silva<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>                    ✓✓ Lido"]
+
+    style DoctorBubble fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#fff
 ```
 
-#### **Resposta da IA Médica**
-```
-┌─────────────────────────────────────┐
-│ 🤖 IA Médica • 14:32                │
-│                                     │
-│ 💊 PRESCRIÇÃO GERADA                │
-│ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  │
-│ Paciente: Maria Silva (45a)         │
-│ Medicamento: Ibuprofeno 400mg       │
-│ Posologia: 1cp 8/8h por 5 dias     │
-│ ⚠️ Verificado: Sem interações       │
-│                                     │
-│ [📄 Imprimir] [📧 Enviar] [✏️ Editar] │
-└─────────────────────────────────────┘
+### **Chat Bubble da IA - Estilo Gemini Estruturado**
+
+```mermaid
+flowchart TD
+    AIBubble["🤖 RESPOSTA IA MÉDICA<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>IA Médica • 14:32<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>💊 PRESCRIÇÃO GERADA<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>Paciente: Maria Silva (45a)<br/>Medicamento: Ibuprofeno 400mg<br/>Posologia: 1cp 8/8h por 5 dias<br/>⚠️ Verificado: Sem interações<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>[📄 Imprimir] [📧 Enviar] [✏️ Editar]"]
+
+    style AIBubble fill:#F3E5F5,stroke:#6A1B9A,stroke-width:2px,color:#000
 ```
 
-### **Cards de Dados Estruturados - Estilo Gemini**
+### **Card de Paciente - Estilo Gemini Dados Estruturados**
 
-#### **Card de Paciente**
-```
-╭─────────────────────────────────────╮
-│ 👤 DADOS DO PACIENTE                │
-├─────────────────────────────────────┤
-│ Nome: Maria Silva                   │
-│ Idade: 45 anos                      │
-│ Sexo: Feminino                      │
-│ Registro: #12345                    │
-├─────────────────────────────────────┤
-│ 🏥 DEPARTAMENTO                     │
-│ Endocrinologia - Sala 203           │
-│ Dr. Roberto Silva                   │
-├─────────────────────────────────────┤
-│ 📅 ÚLTIMA CONSULTA                  │
-│ 15/01/2024 - Controle diabetes     │
-│ Próxima: 29/01/2024                │
-╰─────────────────────────────────────╯
+```mermaid
+flowchart TD
+    PatientCard["👤 DADOS DO PACIENTE<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>Nome: Maria Silva<br/>Idade: 45 anos<br/>Sexo: Feminino<br/>Registro: #12345<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>🏥 DEPARTAMENTO<br/>Endocrinologia - Sala 203<br/>Dr. Roberto Silva<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>📅 ÚLTIMA CONSULTA<br/>15/01/2024 - Controle diabetes<br/>Próxima: 29/01/2024"]
+    
+    ActionPatient["🎯 AÇÕES RÁPIDAS<br/>[📋 Histórico] [📅 Agendar] [💊 Receitas]"]
+
+    PatientCard --> ActionPatient
+
+    style PatientCard fill:#E3F2FD,stroke:#1565C0,stroke-width:2px,color:#000
+    style ActionPatient fill:#FFFFFF,stroke:#4CAF50,stroke-width:2px,color:#000
 ```
 
-#### **Card de Exames**
-```
-╭─────────────────────────────────────╮
-│ 🔬 RESULTADOS LABORATORIAIS         │
-├─────────────────────────────────────┤
-│ Data: 20/01/2024                    │
-│                                     │
-│ 🩸 Glicemia em Jejum                │
-│ 180 mg/dL     ⚠️ ALTO (REF: 70-100) │
-│                                     │
-│ 🧪 HbA1c                           │
-│ 7.2%          ⚠️ ALTO (REF: <7.0)   │
-│                                     │
-│ 💉 Insulina                         │
-│ 15 mU/L       ✅ NORMAL (REF: 2-20) │
-├─────────────────────────────────────┤
-│ 🎯 AÇÃO REQUERIDA                   │
-│ Ajuste medicação + dieta restritiva │
-╰─────────────────────────────────────╯
+### **Card de Exames - Resultados com Status Visual**
+
+```mermaid
+flowchart TD
+    LabCard["🔬 RESULTADOS LABORATORIAIS<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>Data: 20/01/2024<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>🩸 Glicemia em Jejum<br/>180 mg/dL ⚠️ ALTO (70-100)<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>🧪 HbA1c<br/>7.2% ⚠️ ALTO (REF: <7.0)<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>💉 Insulina<br/>15 mU/L ✅ NORMAL (2-20)"]
+    
+    LabAction["🎯 AÇÃO REQUERIDA<br/>Ajuste medicação + dieta restritiva<br/>[📈 Ver Tendência] [💊 Prescrever] [📄 Relatório]"]
+
+    LabCard --> LabAction
+
+    style LabCard fill:#FFF3E0,stroke:#FF9800,stroke-width:2px,color:#000
+    style LabAction fill:#FFEBEE,stroke:#F44336,stroke-width:2px,color:#000
 ```
 
 ---
@@ -217,68 +192,78 @@ flowchart TD
 
 ## 🔧 Estados de Interface
 
-### **Estado de Loading - memOS Inspired**
+### **Estado de Loading - memOS Clean & Focused**
 
-```
-┌─────────────────────────┐
-│                         │
-│    ●●●●●●●●●●●●●●●●●●●   │
-│                         │
-│   Consultando IA...     │
-│                         │
-│   Analisando dados do   │
-│   paciente Maria Silva  │
-│                         │
-└─────────────────────────┘
+```mermaid
+flowchart TD
+    LoadingState["🔄 CONSULTANDO IA<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>●●●●●●●●●●●●●●●●●●●<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>Analisando dados do<br/>paciente Maria Silva<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>Processando solicitação...<br/>Por favor aguarde"]
+
+    style LoadingState fill:#F8F9FA,stroke:#6C757D,stroke-width:2px,color:#000
 ```
 
-### **Estado de Erro - Amigável**
+### **Estado de Erro - Interface Amigável**
 
+```mermaid
+flowchart TD
+    ErrorState["⚠️ OPS! ALGO DEU ERRADO<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>Não consegui processar<br/>sua solicitação.<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>Tente uma destas opções:"]
+    
+    ErrorActions["🎯 OPÇÕES DE RECUPERAÇÃO<br/>[🔄 Tentar Novamente] [🎤 Usar Voz] [💬 Chat Texto]"]
+
+    ErrorState --> ErrorActions
+
+    style ErrorState fill:#FFEBEE,stroke:#F44336,stroke-width:2px,color:#000
+    style ErrorActions fill:#FFFFFF,stroke:#FF9800,stroke-width:2px,color:#000
 ```
-┌─────────────────────────┐
-│   ⚠️ Ops! Algo deu errado  │
-│                         │
-│ Não consegui processar  │
-│ sua solicitação.        │
-│                         │
-│ [🔄 Tentar Novamente]    │
-│ [🎤 Usar Voz]           │
-│ [💬 Chat Texto]         │
-└─────────────────────────┘
+
+### **Estado de Sucesso - Confirmação Visual**
+
+```mermaid
+flowchart TD
+    SuccessState["✅ AÇÃO REALIZADA COM SUCESSO<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>Prescrição gerada para<br/>Maria Silva<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>Ibuprofeno 400mg<br/>1cp 8/8h por 5 dias"]
+    
+    SuccessActions["🎯 PRÓXIMAS AÇÕES<br/>[📄 Imprimir] [📧 Enviar Paciente] [📋 Nova Consulta]"]
+
+    SuccessState --> SuccessActions
+
+    style SuccessState fill:#E8F5E8,stroke:#4CAF50,stroke-width:2px,color:#000
+    style SuccessActions fill:#FFFFFF,stroke:#4CAF50,stroke-width:2px,color:#000
 ```
 
 ---
 
 ## 📱 Responsive Design - Adaptação Mobile
 
-### **Layout Portrait (Vertical)**
-```
-┌─────────────────┐
-│ 📱 Header       │
-├─────────────────┤
-│                 │
-│  💬 Chat Area   │
-│                 │
-│     (Scroll)    │
-│                 │
-├─────────────────┤
-│ 📝 Input + 🎤   │
-├─────────────────┤
-│ ⚡ Quick Actions │
-└─────────────────┘
+### **Layout Portrait (Vertical) - iPhone Padrão**
+
+```mermaid
+flowchart TD
+    PortraitHeader["📱 HEADER MÉDICO<br/>Dr. Silva • Cardiologia • 🔔"]
+    PortraitChat["💬 ÁREA DE CHAT PRINCIPAL<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>🤖 IA: Como posso ajudar?<br/>👨‍⚕️ Dados paciente João<br/>🤖 [Card estruturado exibido]<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>(Scroll infinito conversas)"]
+    PortraitInput["📝 BARRA INPUT + VOZ<br/>🎤 [Gravar] | Digite... | 📁 Upload | ➤"]
+    PortraitActions["⚡ AÇÕES RÁPIDAS<br/>👥 Pacientes | 🔬 Labs | 💊 Receitas | 📊 Relatórios"]
+
+    PortraitHeader --> PortraitChat
+    PortraitChat --> PortraitInput
+    PortraitInput --> PortraitActions
+
+    style PortraitHeader fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#fff
+    style PortraitChat fill:#F5F5F5,stroke:#E0E0E0,stroke-width:2px,color:#000
+    style PortraitInput fill:#FFFFFF,stroke:#1565C0,stroke-width:2px,color:#000
+    style PortraitActions fill:#E3F2FD,stroke:#1565C0,stroke-width:2px,color:#000
 ```
 
-### **Layout Landscape (Horizontal)**
-```
-┌─────────────┬─────────────┐
-│ 📱 Header   │             │
-├─────────────┤ 📋 Context  │
-│             │    Panel    │
-│ 💬 Chat     │             │
-│   Area      │ 📊 Charts   │
-│             │             │
-│ 📝 Input+🎤 │ 📋 Actions  │
-└─────────────┴─────────────┘
+### **Layout Landscape (Horizontal) - Visão Expandida**
+
+```mermaid
+flowchart LR
+    LandscapeLeft["💬 CHAT PRINCIPAL<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>🤖 Conversas médicas<br/>👨‍⚕️ Comandos de voz<br/>📋 Histórico paciente<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>📝 Input + 🎤 Gravação"]
+    
+    LandscapeRight["📋 PAINEL CONTEXTO<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>👤 Paciente Ativo<br/>João Santos, 67a<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>📊 GRÁFICOS VITAIS<br/>📈 Pressão arterial<br/>🩸 Glicemia trends<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>⚡ AÇÕES CONTEXTUAIS<br/>💊 Prescrever | 📅 Agendar"]
+
+    LandscapeLeft -.-> LandscapeRight
+
+    style LandscapeLeft fill:#F5F5F5,stroke:#E0E0E0,stroke-width:2px,color:#000
+    style LandscapeRight fill:#E3F2FD,stroke:#1565C0,stroke-width:2px,color:#000
 ```
 
 ---
@@ -347,45 +332,5 @@ flowchart TD
 - **Font scaling**: Suporte Dynamic Type
 - **Voice Over**: Labels descritivos
 - **Gesture navigation**: Suporte completo
-
----
-
-## 🚀 Implementação SwiftUI
-
-### **Componente Chat Bubble**
-```swift
-struct MedicalChatBubble: View {
-    let message: MedicalMessage
-    let isFromDoctor: Bool
-    
-    var body: some View {
-        HStack {
-            if isFromDoctor { Spacer() }
-            
-            VStack(alignment: .leading, spacing: 8) {
-                HStack {
-                    Image(systemName: isFromDoctor ? "stethoscope" : "brain.head.profile")
-                    Text(isFromDoctor ? "Dr. Silva" : "IA Médica")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
-                
-                Text(message.content)
-                    .font(.body)
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 12)
-                    .background(
-                        RoundedRectangle(cornerRadius: 18)
-                            .fill(isFromDoctor ? Color.blue : Color.purple.opacity(0.1))
-                    )
-                    .foregroundColor(isFromDoctor ? .white : .primary)
-            }
-            
-            if !isFromDoctor { Spacer() }
-        }
-        .padding(.horizontal)
-    }
-}
-```
 
 Esta especificação de design garante uma interface médica **familiar** (WhatsApp), **inteligente** (Gemini), e **focada** (memOS) para máxima eficiência no ambiente hospitalar. 
