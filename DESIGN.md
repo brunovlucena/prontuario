@@ -2,97 +2,123 @@
 
 ## 📱 Conceito de Design Híbrido
 
-A interface do Prontuário combina os melhores elementos de três paradigmas de design para criar uma experiência médica otimizada:
+A interface do Prontuário combina os melhores elementos de três paradigmas de design em um fluxo de duas telas principais:
 
-| **Inspiração** | **Elementos Adotados** | **Aplicação Médica** |
-|----------------|------------------------|----------------------|
-| **💬 WhatsApp** | **Chat bubbles, threads, áudio** | **Conversas com IA médica, histórico pacientes** |
-| **🤖 Gemini** | **Respostas estruturadas, code blocks** | **Planos tratamento, protocolos médicos** |
-| **🧠 memOS** | **Interface limpa, foco cognitivo** | **Redução sobrecarga, workflow eficiente** |
+### **🔄 Fluxo de Navegação**
+
+**Main Screen (WhatsApp)** → **Chat Screen (Gemini)** → **Conversa Ativa (Gemini + memOS)**
+
+| **Tela** | **Inspiração** | **Elementos Adotados** | **Aplicação Médica** |
+|----------|----------------|------------------------|----------------------|
+| **🏠 Main Screen** | **💬 WhatsApp** | **Lista chats, search, filtros, tabs** | **Lista pacientes, busca IA, filtros departamento** |
+| **💬 Chat Screen** | **🤖 Gemini** | **Interface limpa, "Hello", input minimalista** | **Conversa com IA médica, comandos por voz** |
+| **📊 Conversa Ativa** | **🧠 memOS + Gemini** | **Respostas estruturadas, foco cognitivo** | **Dados médicos organizados, decisões clínicas** |
 
 ---
 
-## 🎨 Paleta de Cores Médica
+## 🎨 Paleta de Cores Unificada
 
-### **Cores Primárias**
-
-```
-🔵 Azul Médico Principal: #1565C0 (Confiança, profissionalismo)
-⚪ Branco Limpo: #FFFFFF (Clareza, higiene)
-🔷 Azul Claro: #E3F2FD (Calma, serenidade)
-⚫ Cinza Texto: #212121 (Legibilidade)
-```
-
-### **Cores de Status Médico**
+### **Cores Primárias - Base Medical**
 
 ```
-🟢 Verde Sucesso: #4CAF50 (Resultados normais, sucesso)
-🟡 Amarelo Alerta: #FF9800 (Atenção, resultados borderline)
-🔴 Vermelho Crítico: #F44336 (Urgente, valores anormais)
-🟣 Roxo IA: #6A1B9A (Respostas da IA médica)
+🔵 Azul Médico Principal: #1565C0  (Headers, comandos médico)
+⚪ Branco Limpo: #FFFFFF          (Backgrounds principais)
+🔷 Azul Claro: #E3F2FD           (Filtros, sugestões)
+⚪ Cinza Claro: #F5F5F5          (Search bars, inputs)
+📐 Cinza Borda: #E0E0E0          (Bordas consistentes)
 ```
+
+### **Cores Funcionais - Estados Médicos**
+
+```
+🟣 Roxo IA: #F3E5F5/#6A1B9A     (Respostas estruturadas da IA)
+🟢 Verde Sucesso: #E8F5E8/#4CAF50 (Ações, confirmações)
+🟡 Amarelo Alerta: #FFF3E0/#FF9800 (Atenção médica)
+🔴 Vermelho Crítico: #FFEBEE/#F44336 (Urgente, anormal)
+```
+
+### **Aplicação Consistente**
+
+| **Elemento** | **Cor de Fundo** | **Cor de Borda** | **Texto** |
+|--------------|-------------------|------------------|-----------|
+| **Headers** | `#1565C0` | `#0D47A1` | Branco |
+| **Backgrounds** | `#FFFFFF` | `#E0E0E0` | Preto |
+| **Inputs/Search** | `#F5F5F5` | `#E0E0E0` | Preto |
+| **Filtros** | `#E3F2FD` | `#1565C0` | Preto |
+| **IA Responses** | `#F3E5F5` | `#6A1B9A` | Preto |
+| **Actions** | `#E8F5E8` | `#4CAF50` | Preto |
 
 ---
 
 ## 📱 Wireframes das Telas Principais
 
-### **1. Tela de Chat Principal (Inspirada em WhatsApp)**
+### **1. Main Screen - Lista de Pacientes (Estilo WhatsApp)**
 
 ```mermaid
 flowchart TD
-    Header["📱 HEADER<br/>👨‍⚕️ Dr. Silva | 🔔 Alertas | ⚙️"]
+    MainHeader["📱 HEADER PRINCIPAL<br/>Prontuário • Dr. Silva • 🔔 • ⚙️ • ➕"]
     
-    ChatArea["💬 ÁREA DE CHAT<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>🤖 IA: Bom dia! Como posso ajudar?<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>👨‍⚕️ Mostre dados Paciente 123<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>🤖 [CARD ESTRUTURADO]<br/>📊 Maria Silva, 45 anos<br/>🩺 Diabetes Tipo 2<br/>💊 Metformina 500mg<br/>📈 HbA1c: 7.2% (⚠️ Alto)<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━"]
+    SearchBar["🔍 BUSCA IA MÉDICA<br/>Ask Medical AI or Search Patient..."]
     
-    InputBar["📝 BARRA INPUT<br/>🎤 [Gravação] | Digite mensagem... | 📁 Upload | ➤"]
+    FilterTabs["📋 FILTROS<br/>All | Urgent 2 | Today | ICU | ➕"]
     
-    QuickActions["⚡ AÇÕES RÁPIDAS<br/>👥 Pacientes | 🔬 Labs | 💊 Receitas | 📊 Relatórios"]
+    PatientList["👥 LISTA DE PACIENTES<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>📂 Archived                    12<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>👤 Maria Silva, 45a     Yesterday<br/>🩺 Diabetes: HbA1c alto. Consulta?<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>👤 João Santos, 67a        18:24<br/>🫀 Cardiologia: Pressão controlada<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>👤 Ana Costa, 32a          18:00<br/>🤰 Obs: Pré-natal de rotina OK<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>👤 Pedro Lima, 55a         17:58<br/>🎤 Análise exames pendente..."]
 
-    Header --> ChatArea
-    ChatArea --> InputBar
-    InputBar --> QuickActions
+    TabBar["📱 TAB BAR<br/>Updates | Calls | Teams | Chats | Settings"]
 
-    style Header fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#fff
-    style ChatArea fill:#F5F5F5,stroke:#E0E0E0,stroke-width:2px,color:#000
-    style InputBar fill:#FFFFFF,stroke:#1565C0,stroke-width:2px,color:#000
-    style QuickActions fill:#E3F2FD,stroke:#1565C0,stroke-width:2px,color:#000
+    MainHeader --> SearchBar
+    SearchBar --> FilterTabs
+    FilterTabs --> PatientList
+    PatientList --> TabBar
+
+    style MainHeader fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#fff
+    style SearchBar fill:#F5F5F5,stroke:#E0E0E0,stroke-width:2px,color:#000
+    style FilterTabs fill:#E3F2FD,stroke:#1565C0,stroke-width:2px,color:#000
+    style PatientList fill:#FFFFFF,stroke:#E0E0E0,stroke-width:2px,color:#000
+    style TabBar fill:#F5F5F5,stroke:#E0E0E0,stroke-width:2px,color:#000
 ```
 
-### **2. Resposta Estruturada da IA (Inspirada em Gemini)**
+### **2. Chat Screen - Conversa com IA (Estilo Gemini)**
 
 ```mermaid
 flowchart TD
-    UserQuery["👨‍⚕️ USUÁRIO<br/>Analise exames de Maria Silva"]
+    ChatHeader["📱 CHAT HEADER<br/>← Maria Silva, 45a • Diabetes"]
     
-    AIResponse["🤖 RESPOSTA IA ESTRUTURADA<br/>┌─────────────────────────────────┐<br/>│ 📊 ANÁLISE LABORATORIAL        │<br/>├─────────────────────────────────┤<br/>│ 🔍 Glicemia: 180 mg/dL         │<br/>│ ⚠️  Status: ELEVADA            │<br/>│ 📈 Tendência: +15% (30 dias)   │<br/>├─────────────────────────────────┤<br/>│ 💡 RECOMENDAÇÕES               │<br/>│ • Ajustar Metformina para 850mg│<br/>│ • Reavaliar em 2 semanas       │<br/>│ • Orientar dieta restritiva     │<br/>├─────────────────────────────────┤<br/>│ 📋 PRÓXIMOS PASSOS             │<br/>│ [ ] Receita atualizada          │<br/>│ [ ] Agendamento retorno         │<br/>│ [ ] Orientação nutricional      │<br/>└─────────────────────────────────┘"]
+    WelcomeArea["🎯 ÁREA PRINCIPAL LIMPA<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>                          <br/>     Hello, Dr. Silva      <br/>                          <br/>━━━━━━━━━━━━━━━━━━━━━━━━━━"]
     
-    ActionButtons["🎯 BOTÕES AÇÃO<br/>[💊 Prescrever] [📅 Agendar] [📄 Imprimir]"]
+    InputArea["🎤 ASK MEDICAL AI<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>➕ | Video | Research | 🎤 | 📊"]
+    
+    QuickSuggestions["💡 SUGESTÕES RÁPIDAS<br/>I | The | Patient's"]
+
+    ChatHeader --> WelcomeArea
+    WelcomeArea --> InputArea
+    InputArea --> QuickSuggestions
+
+    style ChatHeader fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#fff
+    style WelcomeArea fill:#FFFFFF,stroke:#E0E0E0,stroke-width:2px,color:#1565C0
+    style InputArea fill:#F5F5F5,stroke:#E0E0E0,stroke-width:2px,color:#000
+    style QuickSuggestions fill:#E3F2FD,stroke:#1565C0,stroke-width:2px,color:#000
+```
+
+### **3. Conversa Ativa - Resposta Estruturada da IA**
+
+```mermaid
+flowchart TD
+    UserQuery["👨‍⚕️ COMANDO DO MÉDICO<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>Analise exames de Maria Silva<br/>                         ✓✓"]
+    
+    AIResponse["🤖 IA RESPOSTA ESTRUTURADA<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>📊 ANÁLISE LABORATORIAL<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>🔍 Glicemia: 180 mg/dL<br/>⚠️ Status: ELEVADA<br/>📈 Tendência: +15% (30 dias)<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>💡 RECOMENDAÇÕES<br/>• Ajustar Metformina para 850mg<br/>• Reavaliar em 2 semanas<br/>• Orientar dieta restritiva<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>📋 PRÓXIMOS PASSOS<br/>☐ Receita atualizada<br/>☐ Agendamento retorno<br/>☐ Orientação nutricional"]
+    
+    ActionButtons["🎯 AÇÕES CONTEXTUAIS<br/>[💊 Prescrever] [📅 Agendar] [📄 Imprimir] [🔄 Refinar]"]
 
     UserQuery --> AIResponse
     AIResponse --> ActionButtons
 
-    style UserQuery fill:#E3F2FD,stroke:#1565C0,stroke-width:2px,color:#000
+    style UserQuery fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#fff
     style AIResponse fill:#F3E5F5,stroke:#6A1B9A,stroke-width:2px,color:#000
-    style ActionButtons fill:#FFFFFF,stroke:#4CAF50,stroke-width:2px,color:#000
+    style ActionButtons fill:#E8F5E8,stroke:#4CAF50,stroke-width:2px,color:#000
 ```
 
-### **3. Interface Limpa - Foco Cognitivo (Inspirada em memOS)**
 
-```mermaid
-flowchart TD
-    MinimalHeader["📱 HEADER MINIMALISTA<br/>Prontuário • 14:30"]
-    
-    FocusArea["🎯 ÁREA DE FOCO<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>       PACIENTE ATIVO       <br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>    👨‍⚕️ João Santos, 67a      <br/>    🫀 Cardiologia           <br/>    ⏰ Consulta: 14:45       <br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>                              <br/>  🎤 Diga o que precisa...   <br/>                              <br/>━━━━━━━━━━━━━━━━━━━━━━━━━━"]
-    
-    ContextCards["📋 CARDS CONTEXTUAIS<br/>🩺 Últimos Sinais Vitais<br/>💊 Medicações Atuais<br/>📊 Exames Pendentes"]
-
-    MinimalHeader --> FocusArea
-    FocusArea --> ContextCards
-
-    style MinimalHeader fill:#FAFAFA,stroke:#E0E0E0,stroke-width:1px,color:#666
-    style FocusArea fill:#FFFFFF,stroke:#E0E0E0,stroke-width:2px,color:#000
-    style ContextCards fill:#F8F9FA,stroke:#E0E0E0,stroke-width:1px,color:#000
-```
 
 ---
 
@@ -116,7 +142,7 @@ flowchart TD
     style AIBubble fill:#F3E5F5,stroke:#6A1B9A,stroke-width:2px,color:#000
 ```
 
-### **Card de Paciente - Estilo Gemini Dados Estruturados**
+### **Card de Paciente - Dados Estruturados**
 
 ```mermaid
 flowchart TD
@@ -126,8 +152,8 @@ flowchart TD
 
     PatientCard --> ActionPatient
 
-    style PatientCard fill:#E3F2FD,stroke:#1565C0,stroke-width:2px,color:#000
-    style ActionPatient fill:#FFFFFF,stroke:#4CAF50,stroke-width:2px,color:#000
+    style PatientCard fill:#FFFFFF,stroke:#E0E0E0,stroke-width:2px,color:#000
+    style ActionPatient fill:#E8F5E8,stroke:#4CAF50,stroke-width:2px,color:#000
 ```
 
 ### **Card de Exames - Resultados com Status Visual**
@@ -140,8 +166,8 @@ flowchart TD
 
     LabCard --> LabAction
 
-    style LabCard fill:#FFF3E0,stroke:#FF9800,stroke-width:2px,color:#000
-    style LabAction fill:#FFEBEE,stroke:#F44336,stroke-width:2px,color:#000
+    style LabCard fill:#FFFFFF,stroke:#E0E0E0,stroke-width:2px,color:#000
+    style LabAction fill:#FFF3E0,stroke:#FF9800,stroke-width:2px,color:#000
 ```
 
 ---
@@ -184,7 +210,7 @@ flowchart TD
     ChartArea --> ChartInsights
 
     style ChartHeader fill:#E3F2FD,stroke:#1565C0,stroke-width:2px,color:#000
-    style ChartArea fill:#FAFAFA,stroke:#E0E0E0,stroke-width:2px,color:#000
+    style ChartArea fill:#FFFFFF,stroke:#E0E0E0,stroke-width:2px,color:#000
     style ChartInsights fill:#F3E5F5,stroke:#6A1B9A,stroke-width:2px,color:#000
 ```
 
@@ -192,13 +218,13 @@ flowchart TD
 
 ## 🔧 Estados de Interface
 
-### **Estado de Loading - memOS Clean & Focused**
+### **Estado de Loading - Interface Limpa**
 
 ```mermaid
 flowchart TD
     LoadingState["🔄 CONSULTANDO IA<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>●●●●●●●●●●●●●●●●●●●<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>Analisando dados do<br/>paciente Maria Silva<br/>━━━━━━━━━━━━━━━━━━━━━━━━━━<br/>Processando solicitação...<br/>Por favor aguarde"]
 
-    style LoadingState fill:#F8F9FA,stroke:#6C757D,stroke-width:2px,color:#000
+    style LoadingState fill:#F5F5F5,stroke:#E0E0E0,stroke-width:2px,color:#000
 ```
 
 ### **Estado de Erro - Interface Amigável**
@@ -212,7 +238,7 @@ flowchart TD
     ErrorState --> ErrorActions
 
     style ErrorState fill:#FFEBEE,stroke:#F44336,stroke-width:2px,color:#000
-    style ErrorActions fill:#FFFFFF,stroke:#FF9800,stroke-width:2px,color:#000
+    style ErrorActions fill:#FFF3E0,stroke:#FF9800,stroke-width:2px,color:#000
 ```
 
 ### **Estado de Sucesso - Confirmação Visual**
@@ -226,7 +252,7 @@ flowchart TD
     SuccessState --> SuccessActions
 
     style SuccessState fill:#E8F5E8,stroke:#4CAF50,stroke-width:2px,color:#000
-    style SuccessActions fill:#FFFFFF,stroke:#4CAF50,stroke-width:2px,color:#000
+    style SuccessActions fill:#FFFFFF,stroke:#E0E0E0,stroke-width:2px,color:#000
 ```
 
 ---
@@ -247,8 +273,8 @@ flowchart TD
     PortraitInput --> PortraitActions
 
     style PortraitHeader fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#fff
-    style PortraitChat fill:#F5F5F5,stroke:#E0E0E0,stroke-width:2px,color:#000
-    style PortraitInput fill:#FFFFFF,stroke:#1565C0,stroke-width:2px,color:#000
+    style PortraitChat fill:#FFFFFF,stroke:#E0E0E0,stroke-width:2px,color:#000
+    style PortraitInput fill:#F5F5F5,stroke:#E0E0E0,stroke-width:2px,color:#000
     style PortraitActions fill:#E3F2FD,stroke:#1565C0,stroke-width:2px,color:#000
 ```
 
@@ -262,7 +288,7 @@ flowchart LR
 
     LandscapeLeft -.-> LandscapeRight
 
-    style LandscapeLeft fill:#F5F5F5,stroke:#E0E0E0,stroke-width:2px,color:#000
+    style LandscapeLeft fill:#FFFFFF,stroke:#E0E0E0,stroke-width:2px,color:#000
     style LandscapeRight fill:#E3F2FD,stroke:#1565C0,stroke-width:2px,color:#000
 ```
 
