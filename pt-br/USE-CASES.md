@@ -526,3 +526,101 @@ Esta seção delineia casos de uso abrangentes para a plataforma médica Prontu�
 ```
 
 Casos de uso com identidade ASCII visual consistente e fluxos práticos para Hospital Real Português! 🏥✨
+
+---
+
+## 🔮 Casos de Uso Futuros (Fora do Escopo Atual)
+
+### 🏡 Caso de Uso: SUS Médico-da-família (Visitas Domiciliares)
+
+**Contexto**: Programa médico da família do Sistema Único de Saúde (SUS)  
+**Cenário**: Atendimento médico móvel com visitas domiciliares  
+**Escala**: 1 médico da família + assistente IA móvel visitando 15-20 pacientes/dia
+
+#### Requisitos Únicos para Visitas Domiciliares
+
+```sh
+┌─────────────────────────────────────┐
+│ 🚶‍⚕️ CONSULTA MÉDICA MÓVEL           │
+├─────────────────────────────────────┤
+│                                     │
+│ 📱 PLATAFORMA MOBILE-FIRST          │
+│  ├─► Operação offline capaz         │
+│  ├─► Interface otimizada bateria    │
+│  └─► Adaptação Celular/WiFi         │
+│                                     │
+│ 🏠 ADAPTAÇÕES AMBIENTE DOMICILIAR   │
+│  ├─► Interface paciente simplificada│
+│  ├─► Envolvimento familiares        │
+│  ├─► Funcionalidades sensibilidade  │
+│  └─► Suporte multilíngue            │
+│                                     │
+│ 🌐 INTEGRAÇÃO SISTEMA SUS           │
+│  ├─► Prontuários e-SUS AB           │
+│  ├─► Conformidade relatórios DATASUS│
+│  ├─► Coordenação saúde municipal    │
+│  └─► Listas pacientes por território│
+│                                     │
+│ 📋 FUNCIONALIDADES SAÚDE COMUNITÁRIA│
+│  ├─► Agendamento cuidados preventivos│
+│  ├─► Rastreamento determinantes     │
+│  ├─► Entrega educação saúde         │
+│  └─► Métricas saúde comunitária     │
+│                                     │
+└─────────────────────────────────────┘
+```
+
+#### Exemplo Fluxo Visita Domiciliar
+
+**Horário**: 9:00 AM - Visita familiar na periferia de São Paulo  
+**Paciente**: Maria, 65 anos, monitoramento diabetes + hipertensão
+
+```sh
+┌─────────────────────────────────────-┐
+│ 🏠 Visita Domiciliar - Maria Santos  │
+├────────────────────────────────────-─┤
+│ 📍 Endereço: Rua das Flores, 123     │
+│ 🎯 Tipo Visita: Monitoramento crônico│
+│                                      │
+│ ✅ SINAIS VITAIS (Dispositivo móvel) │
+│  ├─► PA: 145/90 mmHg (↑ elevada)     │
+│  ├─► Glicose: 180 mg/dL (↑ alta)     │
+│  ├─► Peso: 78kg (+2kg última visita) │
+│  └─► 🤖 Alerta IA: Revisar medicação │
+│                                      │
+│ 👨‍⚕️ AVALIAÇÃO MÉDICA                  │
+│  ├─► Adesão medicação: 70%           │
+│  ├─► Aderência dieta: Baixa          │
+│  ├─► Exercício: Nenhum relatado      │
+│  └─► 🚨 Apoio familiar: Limitado     │
+│                                      │
+│ 📋 RECOMENDAÇÕES IA                  │
+│  ├─► Ajustar dose metformina         │
+│  ├─► Agendar nutricionista           │
+│  ├─► Envolver filha no cuidado       │
+│  └─► Retorno em 15 dias              │
+│                                      │
+│ 📊 SINCRONIZAR BASE SUS              │
+│  └─► Auto-atualizar prontuário e-SUS │
+│                                      │
+└─────────────────────────────────────-┘
+```
+
+#### Considerações Técnicas para Implementação Futura
+
+- **🔄 Sincronização Offline**: Sincronização inteligente quando conectividade disponível
+- **🔋 Otimização Bateria**: Operação estendida para jornadas 8-10 horas  
+- **📡 Resiliência Conectividade**: Adaptação 4G/5G/WiFi com cache offline
+- **🗺️ Integração GPS**: Mapeamento território e planejamento rota otimizada
+- **👥 Suporte Multi-usuário**: Acesso familiares para coordenação cuidados
+- **📊 Analytics Comunitários**: Insights saúde populacional para planejamento SUS
+
+#### Proposta de Valor Futura
+
+- **🌍 Cobertura Universal Saúde**: Estender IA médica para comunidades carentes
+- **💰 Cuidado Custo-Efetivo**: Reduzir reinternações através prevenção
+- **📈 Saúde Populacional**: Insights data-driven para políticas saúde pública
+- **🤝 Equidade Saúde**: Conectar lacunas assistenciais em áreas remotas/periferias
+- **🇧🇷 Integração SUS**: Integração completa com sistema público saúde brasileiro
+
+**Nota**: Este caso de uso representa expansão futura além do escopo atual focado em hospitais, requerendo otimização móvel especializada, integração SUS e fluxos saúde comunitária.

@@ -527,4 +527,102 @@ This section outlines comprehensive use cases for the Medical Record MVP platfor
 └─────────────────────────────────────┘
 ```
 
-Use cases with consistent ASCII visual identity and practical workflows for Real Portuguese Hospital! 🏥✨ 
+Use cases with consistent ASCII visual identity and practical workflows for Real Portuguese Hospital! 🏥✨
+
+---
+
+## 🔮 Future Use Cases (Out of Current Scope)
+
+### 🏡 Use Case: SUS Médico-da-família (Family Doctor Home Visits)
+
+**Context**: Brazilian public health system (SUS) family doctor program  
+**Scenario**: Mobile medical care with home patient visits  
+**Scale**: 1 family doctor + mobile AI assistant visiting 15-20 patients/day
+
+#### Unique Requirements for Home Visits
+
+```sh
+┌─────────────────────────────────────┐
+│ 🚶‍⚕️ MOBILE MEDICAL CONSULTATION    │
+├─────────────────────────────────────┤
+│                                     │
+│ 📱 MOBILE-FIRST PLATFORM            │
+│  ├─► Offline-capable operation      │
+│  ├─► Battery-optimized interface    │
+│  └─► Cellular/WiFi adaptive         │
+│                                     │
+│ 🏠 HOME ENVIRONMENT ADAPTATIONS     │
+│  ├─► Simplified patient interface   │
+│  ├─► Family member involvement      │
+│  ├─► Cultural sensitivity features  │
+│  └─► Multilingual support           │
+│                                     │
+│ 🌐 SUS SYSTEM INTEGRATION           │
+│  ├─► e-SUS AB patient records       │
+│  ├─► DATASUS reporting compliance   │
+│  ├─► Municipal health coordination  │
+│  └─► Territory-based patient lists  │
+│                                     │
+│ 📋 COMMUNITY HEALTH FEATURES        │
+│  ├─► Preventive care scheduling     │
+│  ├─► Social determinants tracking   │
+│  ├─► Health education delivery      │
+│  └─► Community health metrics       │
+│                                     │
+└─────────────────────────────────────┘
+```
+
+#### Sample Home Visit Workflow
+
+**Time**: 9:00 AM - Family visit in São Paulo periphery  
+**Patient**: Maria, 65, diabetes + hypertension monitoring
+
+```sh
+┌─────────────────────────────────────┐
+│ 🏠 Home Visit - Maria Santos, 65    │
+├─────────────────────────────────────┤
+│ 📍 Address: Rua das Flores, 123     │
+│ 🎯 Visit Type: Chronic monitoring   │
+│                                     │
+│ ✅ VITAL SIGNS (Mobile device)      │
+│  ├─► BP: 145/90 mmHg (↑ elevated)   │
+│  ├─► Glucose: 180 mg/dL (↑ high)    │
+│  ├─► Weight: 78kg (+2kg last visit) │
+│  └─► 🤖 AI Alert: Medication review │
+│                                     │
+│ 👨‍⚕️ MEDICAL ASSESSMENT               │
+│  ├─► Medication adherence: 70%      │
+│  ├─► Diet compliance: Low           │
+│  ├─► Exercise: None reported        │
+│  └─► 🚨 Family support: Limited     │
+│                                     │
+│ 📋 AI RECOMMENDATIONS               │
+│  ├─► Adjust metformin dose          │
+│  ├─► Schedule nutritionist          │
+│  ├─► Involve daughter in care       │
+│  └─► Return visit in 15 days        │
+│                                     │
+│ 📊 SYNC TO SUS DATABASE             │
+│  └─► Auto-update e-SUS AB record    │
+│                                     │
+└─────────────────────────────────────┘
+```
+
+#### Technical Considerations for Future Implementation
+
+- **🔄 Offline Synchronization**: Smart data sync when connectivity available
+- **🔋 Battery Optimization**: Extended operation for 8-10 hour workdays  
+- **📡 Connectivity Resilience**: 4G/5G/WiFi adaptive with offline cache
+- **🗺️ GPS Integration**: Territory mapping and optimal route planning
+- **👥 Multi-user Support**: Family member access for care coordination
+- **📊 Community Analytics**: Population health insights for SUS planning
+
+#### Future Value Proposition
+
+- **🌍 Universal Health Coverage**: Extend medical AI to underserved communities
+- **💰 Cost-Effective Care**: Reduce hospital readmissions through prevention
+- **📈 Population Health**: Data-driven insights for public health policy
+- **🤝 Health Equity**: Bridge healthcare gaps in remote/urban periphery areas
+- **🇧🇷 SUS Integration**: Complete integration with Brazilian public health system
+
+**Note**: This use case represents a future expansion beyond the current hospital-focused MVP scope, requiring specialized mobile optimization, SUS integration, and community health workflows. 
