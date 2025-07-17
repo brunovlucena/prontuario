@@ -1,20 +1,20 @@
-# Medical Record - Hybrid Local/Cloud Architecture with M3 Ultra
+# Prontuário - Arquitetura Híbrida Local/Cloud com M3 Ultra
 
-## 🎯 Architecture Overview
+## 🎯 Visão Geral da Arquitetura
 
-Medical Record uses a hybrid architecture that combines local AI processing on Mac Studio M3 Ultra with GCP cloud services, optimized for iPhone devices and hospital operations with 200 daily users.
+Prontuário utiliza uma arquitetura híbrida que combina processamento de IA local em Mac Studio M3 Ultra com serviços em nuvem GCP, otimizada para dispositivos iPhone únicos e operações hospitalares de 200 usuários diários.
 
 ---
 
-## 🏗️ High-Level Architecture
+## 🏗️ Arquitetura de Alto Nível
 
 ```sh
 ┌─────────────────────────────────────┐
-│ 📱 iPhone DEVICES                   │
+│ 📱 DISPOSITIVOS iPhone              │
 │                                     │
-│ 👨‍⚕️200 daily users                   │
-│ 🩺 Native medical interface         │
-│ 🎤 Voice commands                   │
+│ 👨‍⚕️200 usuários diários              │
+│ 🩺 Interface médica nativa          │
+│ 🎤 Comandos de voz                  │
 │                                     │
 └─────────────────────────────────────┘
           │
@@ -23,40 +23,40 @@ Medical Record uses a hybrid architecture that combines local AI processing on M
 │ 🖥️ MAC STUDIO M3 ULTRA              │
 │                                     │
 │ 🧠 32-core CPU + 80-core GPU        │
-│ 🤖 Massive AI Processing            │
+│ 🤖 Processamento IA Massivo         │
 │ 📊 3x Kubernetes Nodes (Virtual)    │
-│ 🔄 Unified Orchestration            │
+│ 🔄 Orquestração Unificada           │
 │                                     │
 └─────────────────────────────────────┘
           │
           ▼
 ┌─────────────────────────────────────┐
-│ ☁️ GCP SERVICES                     │
+│ ☁️ SERVIÇOS GCP                     │
 │                                     │
 │ 🎛️ GKE + Pulumi                     │
 │ 💾 Cloud Storage                    │
 │ 🗄️ Cloud SQL                        │
-│ 📋 Data & Orchestration             │
+│ 📋 Dados & Orquestração             │
 │                                     │
 └─────────────────────────────────────┘
 ```
 
 ---
 
-## 🖥️ Local Kubernetes Infrastructure + GCP
+## 🖥️ Infraestrutura Local Kubernetes + GCP
 
 ### 🔧 Mac Studio M3 Ultra Single Machine Cluster
 
-### **Hardware Specifications**
+### **Especificações Hardware**
 
-| **Component** | **Specification** | **Quantity** | **Function** |
-|---------------|-------------------|--------------|-------------|
-| **🖥️ Mac Studio M3 Ultra** | **CPU 32-core (24P+8E), GPU 80-core, 512GB RAM** | **1 unit** | **Main K8s Host** |
-| **🧠 Neural Engine** | **32-core, 36 TOPS** | **1 unit** | **Accelerated AI** |
-| **💾 Internal Storage** | **8TB SSD** | **1 unit** | **Local storage** |
-| **🌐 Network** | **10Gb Ethernet + Thunderbolt 5** | **Integrated** | **Ultra-fast connectivity** |
+| **Componente** | **Especificação** | **Quantidade** | **Função** |
+|----------------|-------------------|----------------|------------|
+| **🖥️ Mac Studio M3 Ultra** | **CPU 32-core (24P+8E), GPU 80-core, 512GB RAM** | **1 unidade** | **Host Principal K8s** |
+| **🧠 Neural Engine** | **32-core, 36 TOPS** | **1 unidade** | **IA Acelerada** |
+| **💾 Internal Storage** | **8TB SSD** | **1 unidade** | **Armazenamento local** |
+| **🌐 Network** | **10Gb Ethernet + Thunderbolt 5** | **Integrado** | **Conectividade ultra-rápida** |
 
-#### **Virtual Multi-Node Kubernetes Configuration**
+#### **Configuração Kubernetes Multi-Node Virtual**
 
 ```sh
 ┌─────────────────────────────────────┐
@@ -84,17 +84,17 @@ Medical Record uses a hybrid architecture that combines local AI processing on M
 
 ---
 
-## 🤖 Advanced AI Workload Distribution
+## 🤖 Distribuição de Workloads IA Avançada
 
-### **Specialization by Virtual Node**
+### **Especialização por Node Virtual**
 
 ```sh
 ┌─────────────────────────────────────┐
-│ 🤖 VIRTUAL NODE 1 - AI INFERENCE    │
+│ 🤖 VIRTUAL NODE 1 - IA INFERENCE    │
 ├─────────────────────────────────────┤
 │ • 🧠 MedGemma 4B (Multimodal)       │
 │ • 🎤 Whisper Large                  │
-│ • 🗣️ Core ML Voice (Advanced)       │
+│ • 🗣️ Core ML Voice (Avançado)       │
 │ • 🔬 Medical Image Analysis         │
 │                                     │
 │ Memory: 300GB (60% total)           │
@@ -132,43 +132,43 @@ Medical Record uses a hybrid architecture that combines local AI processing on M
 │ Storage: 8TB SSD allocation         │
 └─────────────────────────────────────┘
 
-### **📊 Resource Allocation Justification**
+### **📊 Justificativa da Alocação de Recursos**
 
-| **Resource** | **AI Node 1** | **API Node 2** | **Data Node 3** | **Total** | **M3 Ultra Available** |
-|-------------|---------------|-----------------|------------------|-----------|------------------------|
+| **Recurso** | **AI Node 1** | **API Node 2** | **Data Node 3** | **Total** | **Disponível M3 Ultra** |
+|-------------|---------------|-----------------|------------------|-----------|--------------------------|
 | **Memory** | 300GB (60%) | 100GB (20%) | 100GB (20%) | 500GB | 512GB total |
 | **GPU Cores** | 50 (62%) | 15 (19%) | 15 (19%) | 80 | 80 total |
 | **CPU Cores** | 16 (50%) | 8 (25%) | 8 (25%) | 32 | 32 total |
 | **Neural Engine** | 20 (62%) | 6 (19%) | 6 (19%) | 32 | 32 total |
 
-**🎯 Distribution Reasons:**
-- **AI Node 1**: MedGemma 4B requires ~54GB + KV cache for 200 users (~246GB) = 300GB total
-- **API Node 2**: Lightweight web services, request processing = 100GB sufficient  
-- **Data Node 3**: Analytics and cache, doesn't need intensive GPU = 100GB adequate
-- **12GB remaining**: Operating system and Kubernetes overhead
+**🎯 Razões da Distribuição:**
+- **AI Node 1**: MedGemma 4B requer ~54GB + KV cache para 200 usuários (~246GB) = 300GB total
+- **API Node 2**: Serviços web leves, processamento de requisições = 100GB suficiente  
+- **Data Node 3**: Analytics e cache, não precisa de GPU intensiva = 100GB adequado
+- **12GB restantes**: Sistema operacional e overhead do Kubernetes
 
 ```
 
 ---
 
-## 🧠 Advanced AI Stack
+## 🧠 Stack de IA Avançado
 
-### **High-Performance Models and Processing**
+### **Modelos e Processamento de Alto Desempenho**
 
 ```sh
 ┌─────────────────────────────────────┐
-│ 🧠 AI STACK - MASSIVE INFERENCE     │
+│ 🧠 STACK IA - INFERENCE MASSIVO     │
 ├─────────────────────────────────────┤
 │                                     │
 │ 🎤 SPEECH-TO-TEXT                   │
 │  ├─► Whisper Large (1.5GB)          │
 │  ├─► Core ML optimized              │
-│  └─► Latency: <100ms                │
+│  └─► Latência: <100ms               │
 │                                     │
 │ 🤖 LANGUAGE MODEL                   │
 │  ├─► MedGemma 4B (Multimodal)       │
 │  ├─► Medical + Image understanding  │
-│  └─► Medical context 128K tokens    │
+│  └─► Contexto médico 128K tokens    │
 │                                     │
 │ 🔬 MEDICAL IMAGE AI                 │
 │  ├─► SigLIP Medical encoder         │
@@ -178,7 +178,7 @@ Medical Record uses a hybrid architecture that combines local AI processing on M
 │ 🗣️ TEXT-TO-SPEECH                   │
 │  ├─► Core ML Voice Advanced         │
 │  ├─► Natural medical terminology    │
-│  └─► Latency: <200ms                │
+│  └─► Latência: <200ms               │
 │                                     │
 │ 📊 ANALYTICS                        │
 │  ├─► Real-time health insights      │
@@ -190,16 +190,16 @@ Medical Record uses a hybrid architecture that combines local AI processing on M
 
 ---
 
-## 📊 Optimized Data Flow
+## 📊 Fluxo de Dados Otimizado
 
-### **Ultra-Fast Processing Pipeline**
+### **Pipeline Processamento Ultra-Rápido**
 
 ```sh
 ┌─────────────────────────────────────┐
-│ 📊 DATA AND PROCESSING PIPELINE     │
+│ 📊 PIPELINE DADOS E PROCESSAMENTO   │
 ├─────────────────────────────────────┤
 │                                     │
-│ 📱 iPhone App (200 users)           │
+│ 📱 iPhone App (200 usuários)        │
 │  │ 🏥 MVP: WLAN-ONLY ACCESS         │
 │  ▼ 📡 Hospital WiFi 6E (Internal)   │
 │ 🎤 Audio/Image Capture              │
@@ -226,11 +226,11 @@ Medical Record uses a hybrid architecture that combines local AI processing on M
 └─────────────────────────────────────┘
 ```
 
-### **🔧 iPhone Connectivity: Technical Specifications**
+### **🔧 Conectividade iPhone: Especificações Técnicas**
 
 ```sh
 ┌─────────────────────────────────────┐
-│ 📡 iPhone INTERNAL CONNECTIVITY     │
+│ 📡 CONECTIVIDADE iPhone INTERNAL    │
 │ 🏥 MVP PHASE: HOSPITAL-ONLY ACCESS  │
 ├─────────────────────────────────────┤
 │                                     │
@@ -251,7 +251,7 @@ Medical Record uses a hybrid architecture that combines local AI processing on M
 │  ▼ 🎯 Direct to M3 Ultra            │
 │ 🖥️ Mac Studio M3 Ultra (Local)      │
 │                                     │
-│ ⚡ Total Latency: 2-5ms              │
+│ ⚡ Latência Total: 2-5ms             │
 │ 📊 Throughput: 1-9.6Gb/s            │
 │ 🔒 Security: Internal-only isolated │
 │                                     │
@@ -266,11 +266,11 @@ Medical Record uses a hybrid architecture that combines local AI processing on M
 
 ---
 
-# ☁️ GOOGLE CLOUD PLATFORM SERVICES
+# ☁️ SERVIÇOS GOOGLE CLOUD PLATFORM
 
-## 🎛️ GCP Infrastructure with Pulumi
+## 🎛️ Infraestrutura GCP com Pulumi
 
-### **Cloud Components**
+### **Componentes Cloud**
 
 ```sh
 ┌─────────────────────────────────────┐
@@ -300,38 +300,38 @@ Medical Record uses a hybrid architecture that combines local AI processing on M
 └─────────────────────────────────────┘
 ```
 
-### **Infrastructure as Code Management**
+### **Gestão Infraestrutura como Código**
 
-| **Component** | **Technology** | **Function** |
-|---------------|----------------|-------------|
-| **🏗️ Main Infrastructure** | **Pulumi TypeScript** | **GCP resources, networking, security** |
+| **Componente** | **Tecnologia** | **Função** |
+|----------------|----------------|------------|
+| **🏗️ Infraestrutura Principal** | **Pulumi TypeScript** | **GCP resources, networking, security** |
 | **⚙️ Kubernetes Resources** | **Pulumi Python** | **K8s deployments, services, configs** |
-| **📊 Monitoring** | **Pulumi YAML** | **Observability stack, dashboards** |
-| **🔐 Security** | **Pulumi Go** | **IAM policies, secrets, compliance** |
+| **📊 Monitoramento** | **Pulumi YAML** | **Observability stack, dashboards** |
+| **🔐 Segurança** | **Pulumi Go** | **IAM policies, secrets, compliance** |
 
 ---
 
-# 📱 NATIVE iPhone APPLICATION
+# 📱 APLICATIVO iPhone NATIVO
 
-## 🧩 iOS Architecture
+## 🧩 Arquitetura iOS
 
-### **Technology Stack**
+### **Stack Tecnológico**
 
-| **Layer** | **Technology** | **Function** |
-|-----------|----------------|-------------|
-| **🎨 Interface** | **SwiftUI** | **Modern declarative UI** |
-| **🧠 Logic** | **Swift** | **Business logic, coordination** |
-| **🔊 Audio** | **AVFoundation** | **Recording, playback, processing** |
-| **🤖 Local AI** | **Core ML** | **On-device inference** |
+| **Camada** | **Tecnologia** | **Função** |
+|------------|----------------|------------|
+| **🎨 Interface** | **SwiftUI** | **UI declarativa moderna** |
+| **🧠 Lógica** | **Swift** | **Business logic, coordination** |
+| **🔊 Áudio** | **AVFoundation** | **Recording, playback, processing** |
+| **🤖 IA Local** | **Core ML** | **On-device inference** |
 | **🌐 Network** | **URLSession** | **HTTP client, data sync** |
 | **💾 Storage** | **Core Data** | **Local database** |
-| **📊 Data Visualization** | **Charts + Core Graphics** | **Lab/vital signs charts** |
+| **📊 Visualização Dados** | **Charts + Core Graphics** | **Gráficos laboratório/sinais vitais** |
 
-### **Module Architecture**
+### **Arquitetura de Módulos**
 
 ```sh
 ┌─────────────────────────────────────┐
-│ 📱 NATIVE iPhone APPLICATION        │
+│ 📱 APLICATIVO iPhone NATIVO         │
 ├─────────────────────────────────────┤
 │                                     │
 │ 🎨 PRESENTATION LAYER               │
@@ -362,13 +362,13 @@ Medical Record uses a hybrid architecture that combines local AI processing on M
 
 ---
 
-## 📡 Integration and Communication
+## 📡 Integração e Comunicação
 
-### **iPhone ↔ Local Cluster Communication Flow**
+### **Fluxo de Comunicação iPhone ↔ Cluster Local**
 
 ```sh
 ┌─────────────────────────────────────┐
-│ 📡 iPhone ↔ LOCAL K8s COMMUNICATION │
+│ 📡 COMUNICAÇÃO iPhone ↔ LOCAL K8s   │
 ├─────────────────────────────────────┤
 │                                     │
 │ 📱 iPhone App                       │
@@ -467,47 +467,47 @@ Medical Record uses a hybrid architecture that combines local AI processing on M
 
 ---
 
-## ⚡ M3 Ultra Performance Specifications
+## ⚡ Especificações de Performance M3 Ultra
 
-### **M3 Ultra Hardware Specifications**
+### **Especificações de Hardware M3 Ultra**
 
-| **Metric** | **Mac Studio M3 Ultra** | **Medical AI Capability** |
-|------------|-------------------------|---------------------------|
-| **CPU Cores** | 32 cores (24P+8E) | High-performance medical processing |
-| **GPU Cores** | 80 cores | Advanced AI inference acceleration |
-| **Total Memory** | 512GB | Large medical model support |
-| **Memory Bandwidth** | 819GB/s | Ultra-fast data processing |
-| **Neural Engine** | 32-core, 36 TOPS | Accelerated medical AI |
-| **AI Model Support** | MedGemma 4B + Large Models | Enterprise medical AI |
-| **Storage** | 8TB unified | Comprehensive medical data |
-| **Power Efficiency** | 180W max | Energy-efficient operation |
+| **Métrica** | **Mac Studio M3 Ultra** | **Capacidade IA Médica** |
+|-------------|-------------------------|---------------------------|
+| **CPU Cores** | 32 cores (24P+8E) | Processamento médico de alta performance |
+| **GPU Cores** | 80 cores | Aceleração avançada de inferência IA |
+| **Memory Total** | 512GB | Suporte a modelos médicos grandes |
+| **Memory Bandwidth** | 819GB/s | Processamento de dados ultra-rápido |
+| **Neural Engine** | 32-core, 36 TOPS | IA médica acelerada |
+| **AI Model Support** | MedGemma 4B + Large Models | IA médica empresarial |
+| **Storage** | 8TB unified | Dados médicos abrangentes |
+| **Power Efficiency** | 180W max | Operação eficiente em energia |
 
-### **Advanced Medical AI Capabilities**
+### **Capacidades de IA Médica Avançada**
 
 ```sh
 ┌─────────────────────────────────────┐
-│ 🧠 M3 ULTRA MEDICAL AI CAPABILITIES │
+│ 🧠 CAPACIDADES IA MÉDICA M3 ULTRA   │
 ├─────────────────────────────────────┤
 │                                     │
 │ 🤖 LARGE LANGUAGE MODELS            │
 │  ├─► MedGemma 4B: ~24GB VRAM        │
-│  ├─► Possible MedGemma 27B          │
-│  └─► Context: 128K medical tokens   │
+│  ├─► Possível MedGemma 27B          │
+│  └─► Contexto: 128K tokens médicos  │
 │                                     │
 │ 🔬 MEDICAL IMAGE ANALYSIS           │
 │  ├─► Radiology: X-ray, CT, MRI      │
-│  ├─► Pathology: Histology           │
-│  └─► Dermatology: Skin lesions      │
+│  ├─► Pathology: Histologia          │
+│  └─► Dermatology: Lesão cutânea     │
 │                                     │
 │ 📊 REAL-TIME ANALYTICS              │
-│  ├─► 200 simultaneous users         │
-│  ├─► Latency: <100ms                │
+│  ├─► 200 usuários simultâneos       │
+│  ├─► Latência: <100ms               │
 │  └─► Throughput: 1000+ req/min      │
 │                                     │
 │ 🎤 VOICE PROCESSING                 │
-│  ├─► Whisper Large: 99% accuracy    │
-│  ├─► Multiple languages             │
-│  └─► Medical terminology            │
+│  ├─► Whisper Large: 99% precisão    │
+│  ├─► Múltiplos idiomas              │
+│  └─► Terminologia médica            │
 │                                     │
 └─────────────────────────────────────┘
-``` 
+```

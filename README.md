@@ -1,56 +1,57 @@
-# Prontuário - Plataforma de IA Médica MVP
+# Medical Record - Medical AI Platform MVP
 
-## 🏥 Resumo Executivo
+## 🏥 Executive Summary
 
-Prontuário é uma plataforma MVP de IA médica projetada para instituições médicas de médio a grande porte. A plataforma oferece uma interface de chat médico (inspirada em WhatsApp + Gemini + memOS) que permite que seus usuarios gerenciem eficientemente dados de pacientes entre múltiplos departamentos e especialistas.
+Medical Record is a medical AI platform MVP designed for medium to large medical institutions. The platform offers a medical chat interface (inspired by WhatsApp + Gemini + memOS) that allows users to efficiently manage patient data across multiple departments and specialists.
 
-## 🔗 Links para Documentação Adicional
+## 🔗 Links to Additional Documentation
 
-### **📋 Documentação Principal**
+### **📋 Main Documentation**
 
-- **[README.md](./README.md)** - Documentação completa do produto, casos de uso e visão geral
-- **[ARCHITECTURE.md](./ARCHITECTURE.md)** - Arquitetura técnica híbrida local/cloud
-- **[DESIGN.md](./DESIGN.md)** - Interface híbrida WhatsApp + Gemini + memOS com wireframes
-- **[USE-CASES.md](./USE-CASES.md)** - Casos de uso e fluxos departamentais hospitalares
+- **[README.md](./README.md)** - Complete product documentation, use cases and overview
+- **[ARCHITECTURE.md](./ARCHITECTURE.md)** - Hybrid local/cloud technical architecture
+- **[DESIGN.md](./DESIGN.md)** - Hybrid WhatsApp + Gemini + memOS interface with wireframes
+- **[USE-CASES.md](./USE-CASES.md)** - Use cases and hospital departmental workflows
+
 ---
 
 ## 🎯 MVP
 
-### 🤖 IA Médica Empresarial
+### 🤖 Enterprise Medical AI
 
-- **Conversas Naturais**: Interface chat médico (WhatsApp + Gemini + memOS) para dados de pacientes em todos os departamentos
-- **Documentação por Chat/Voz**: Documentação hospitalar moderna e hands-free durante o atendimento ao paciente
-- **Suporte à Decisão Clínica**: Recomendações baseadas em evidências com exames medicos e historico do paciente
+- **Natural Conversations**: Medical chat interface (WhatsApp + Gemini + memOS) for patient data across all departments
+- **Chat/Voice Documentation**: Modern hands-free hospital documentation during patient care
+- **Clinical Decision Support**: Evidence-based recommendations with medical exams and patient history
 
-### 🏢 Infraestrutura Hospitalar Empresarial
+### 🏢 Enterprise Hospital Infrastructure
 
-- **Acesso Baseado em Função**: Médicos assistentes, residentes, enfermeiros e administradores
-- **Suporte Multi-Departamental**: Fluxo de trabalho perfeito em 4 principais departamentos hospitalares
+- **Role-Based Access**: Assistant physicians, residents, nurses and administrators
+- **Multi-Departmental Support**: Seamless workflow across 4 main hospital departments
 
-### 🔒 Segurança e Conformidade de Nível Hospitalar
+### 🔒 Hospital-Level Security and Compliance
 
-- **Autenticação Simples**: Login por usuário e senha
-- **Isolamento Departamental**: Arquitetura multi-inquilino segura para diferentes unidades hospitalares
-- **Processamento Local de Dados**: Processamento de IA on-premise para máxima segurança de dados de pacientes
-
----
-
-## 💡 Proposições de Valor MVP
-
-### Benefícios Centrais
-
-- **🤖 Chat Médico Básico**: Interface estilo WhatsApp + Gemini + memOS para dados pacientes
-- **📱 Mobile-First**: App iOS com autenticação usuário/senha
-- **🎤 Documentação por Voz**: Anotações hands-free com reconhecimento termos médicos
-- **📊 Análises Simples**: Tendência básica sinais vitais e resultados laboratoriais
-- **💊 Busca Medicamentos**: Informações básicas medicamentos e verificação interações
-- **📁 Cofre Documentos**: Upload simples arquivos (PDF, imagens) - sem captura por câmera
-
-### Simplicidade Técnica
-
-- **Autenticação Padrão**: Usuário/senha (sem biometria)
-- **IA Médica Google**: Gemma3n + MedGemma para consultas médicas conversacionais
-- **Processamento IA Local**: Opções custo-efetivas DGX/Mac Mini/Mac Studio
-- **Integração Simples**: Conectividade EMR básica
+- **Simple Authentication**: Username and password login
+- **Departmental Isolation**: Secure multi-tenant architecture for different hospital units
+- **Local Data Processing**: On-premise AI processing for maximum patient data security
 
 ---
+
+## 💡 MVP Value Propositions
+
+### Core Benefits
+
+- **🤖 Basic Medical Chat**: WhatsApp + Gemini + memOS style interface for patient data
+- **📱 Mobile-First**: iOS app with username/password authentication
+- **🎤 Voice Documentation**: Hands-free notes with medical terminology recognition
+- **📊 Simple Analytics**: Basic vital signs trends and laboratory results
+- **💊 Medication Search**: Basic medication information and interaction checking
+- **📁 Document Vault**: Simple file upload (PDF, images) - no camera capture
+
+### Technical Simplicity
+
+- **Standard Authentication**: Username/password (no biometrics)
+- **Google Medical AI**: Gemma3n + MedGemma for conversational medical queries
+- **Local AI Processing**: Cost-effective Mac Studio local AI processing
+- **Simple Integration**: Basic EMR connectivity
+
+--- 

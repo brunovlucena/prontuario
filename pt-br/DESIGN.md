@@ -1,267 +1,267 @@
-# 🎨 Interface Design - Medical Record MVP
+# 🎨 Design Interface - Prontuário MVP
 
-## 📱 Visual Concept: WhatsApp + Gemini
+## 📱 Conceito Visual: WhatsApp + Gemini
 
-**Main Screen** = WhatsApp-style patient list  
-**Chat Screen** = Clean Gemini-style interface  
-
----
-
-## 🎨 Colors
-
-```
-🔵 WhatsApp Green: #075E54 (header)
-⚪ Light Green: #25D366 (actions)  
-🤖 Gemini Blue: #1A73E8 (medical chat)
-⚪ White: #FFFFFF (background)
-🔘 Gray: #F0F0F0 (inputs)
-```
+**Main Screen** = Lista pacientes estilo WhatsApp  
+**Chat Screen** = Interface limpa estilo Gemini  
 
 ---
 
-## 📱 Main Screen - Patient List (WhatsApp Style)
+## 🎨 Cores
 
-```sh
+```
+🔵 Verde WhatsApp: #075E54 (header)
+⚪ Verde Claro: #25D366 (ações)  
+🤖 Azul Gemini: #1A73E8 (chat médico)
+⚪ Branco: #FFFFFF (background)
+🔘 Cinza: #F0F0F0 (inputs)
+```
+
+---
+
+## 📱 Main Screen - Lista Pacientes (WhatsApp Style)
+
+```
 ┌─────────────────────────────────────┐
-│ Medical Record        🔍  📞  ⋮     │ ← WhatsApp green header
+│ Prontuário            🔍  📞  ⋮     │ ← Header verde WhatsApp
 ├─────────────────────────────────────┤
-│ 🔍 Search patients...               │
+│ 🔍 Buscar pacientes...              │
 ├─────────────────────────────────────┤
-│ All | Urgent 🔴 3 | Today 📅 12     │ ← Filters
+│ Todos | Urgente 🔴 3 | Hoje 📅 12   │ ← Filtros
 ├─────────────────────────────────────┤
 │                                     │
 │ 👤  Maria Silva              23:45  │
-│     🩺 Diabetes - High glucose      │
+│     🩺 Diabetes - Glicemia alta     │
 │     ─────────────────────────────   │
 │                                     │
 │ 👤  João Santos              18:30  │
-│     ❤️ Cardiology - BP normal       │
+│     ❤️ Cardiologia - Pressão ok     │
 │     ─────────────────────────────   │
 │                                     │
 │ 👤  Ana Costa                16:15  │
-│     🤰 Prenatal - All normal        │
+│     🤰 Pré-natal - Tudo normal      │
 │     ─────────────────────────────   │
 │                                     │
 │ 👤  Pedro Lima               15:42  │
-│     🧠 Neurology - Tests ok         │
+│     🧠 Neurologia - Exames ok       │
 │     ─────────────────────────────   │
 │                                     │
 ├─────────────────────────────────────┤
-│  📞    👥    💬    ⚙️               │ ← Tab bar
+│  📞    👥    💬    ⚙️              │ ← Tab bar
 └─────────────────────────────────────┘
 ```
 
 ---
 
-## 💬 Chat Screen - AI Conversation (Gemini Style)
+## 💬 Chat Screen - Conversa IA (Gemini Style)
 
-```sh
+```
 ┌─────────────────────────────────────┐
-│ ← Maria Silva, 45y           🩺     │ ← Gemini blue header
+│ ← Maria Silva, 45a           🩺     │ ← Header azul Gemini
 ├─────────────────────────────────────┤
 │                                     │
 │                                     │
 │                                     │
-│            Hello, Dr. Silva         │ ← Clean Gemini-style center
+│            Hello, Dr. Silva         │ ← Centro limpo tipo Gemini
 │                                     │
 │                                     │
 │                                     │
 ├─────────────────────────────────────┤
-│ How can I help with Maria Silva?    │
-│                         🎤 📎 ↗️    │ ← Minimalist input
+│ Como posso ajudar com Maria Silva?  │
+│                         🎤 📎 ↗️    │ ← Input minimalista
 ├─────────────────────────────────────┤
-│  Examine  |  Prescribe  |  History  │ ← Suggestions
+│    Examinar  |  Prescrever  |  Histórico   │ ← Sugestões
 └─────────────────────────────────────┘
 ```
 
 ---
 
-## 🗨️ Chat in Action - Medical Conversation
+## 🗨️ Chat em Ação - Conversa Médica
 
-```sh
+```
 ┌─────────────────────────────────────┐
-│ ← Maria Silva, 45y           🩺     │
+│ ← Maria Silva, 45a           🩺     │
 ├─────────────────────────────────────┤
 │                                     │
 │     ┌─────────────────────────────┐ │
-│     │ Analyze Maria Silva's labs  │ │ ← Medical blue bubble
-│     │                       ✓✓    │ │
+│     │ Analise exames Maria Silva  │ │ ← Bubble azul médico
+│     │                       ✓✓   │ │
 │     └─────────────────────────────┘ │
 │                               14:32 │
 │                                     │
-│ 🤖 Medical AI                       │
+│ 🤖 IA Médica                        │
 │ ┌─────────────────────────────────┐ │
-│ │ 📊 LABORATORY ANALYSIS          │ │ ← Structured AI response
+│ │ 📊 ANÁLISE LABORATORIAL         │ │ ← Resposta estruturada IA
 │ │                                 │ │
-│ │ 🔍 Glucose: 180 mg/dL ⚠️ HIGH   │ │
-│ │ 📈 Trend: +15% (30 days)        │ │
+│ │ 🔍 Glicemia: 180 mg/dL ⚠️ ALTO  │ │
+│ │ 📈 Tendência: +15% (30 dias)    │ │
 │ │                                 │ │
-│ │ 💡 RECOMMENDATION               │ │
-│ │ • Adjust Metformin 850mg        │ │
-│ │ • Reevaluate in 2 weeks         │ │
+│ │ 💡 RECOMENDAÇÃO                 │ │
+│ │ • Ajustar Metformina 850mg      │ │
+│ │ • Reavaliar em 2 semanas        │ │
 │ │                                 │ │
-│ │ [💊 Prescribe] [📅 Schedule]    │ │
+│ │ [💊 Prescrever] [📅 Agendar]    │ │
 │ └─────────────────────────────────┘ │
 │ 14:33                               │
 ├─────────────────────────────────────┤
-│ Type or record your next question   │
+│ Digite ou grave sua próxima pergunta│
 │                         🎤 📎 ↗️    │
 └─────────────────────────────────────┘
 ```
 
 ---
 
-## 🏥 Department Selection - Morning Rounds
+## 🏥 Seleção de Departamento - Rounds Matinais
 
-```sh
+```
 ┌─────────────────────────────────────┐
-│ 🏥 Real Portuguese Hospital   07:00 │ ← Hospital header
+│ 🏥 Hospital Real Português   07:00  │ ← Header hospitalar
 ├─────────────────────────────────────┤
-│         Select Department           │
+│         Selecione Departamento      │
 │                                     │
 │ ┌─────────────────────────────────┐ │
-│ │ ❤️  CARDIOLOGY           12👥   │ │ ← 12 patients
-│ │     2 doctors on rounds         │ │
+│ │ ❤️  CARDIOLOGIA           12👥  │ │ ← 12 pacientes
+│ │     2 médicos em rounds         │ │
 │ └─────────────────────────────────┘ │
 │                                     │
 │ ┌─────────────────────────────────┐ │
-│ │ 🚨  EMERGENCY             3👥   │ │ ← 3 critical cases
-│ │     1 active doctor             │ │
+│ │ 🚨  EMERGÊNCIA             3👥  │ │ ← 3 casos críticos
+│ │     1 médico ativo              │ │
 │ └─────────────────────────────────┘ │
 │                                     │
 │ ┌─────────────────────────────────┐ │
-│ │ 🔪  SURGERY               5👥   │ │ ← 5 pre/post-op
-│ │     1 surgeon on rounds         │ │
+│ │ 🔪  CIRURGIA               5👥  │ │ ← 5 pré/pós-op
+│ │     1 cirurgião em rounds       │ │
 │ └─────────────────────────────────┘ │
 │                                     │
 │ ┌─────────────────────────────────┐ │
-│ │ 🏥  ICU                   2👥   │ │ ← 2 critical care
-│ │     1 active intensivist        │ │
+│ │ 🏥  UTI                    2👥  │ │ ← 2 cuidados críticos
+│ │     1 intensivista ativo        │ │
 │ └─────────────────────────────────┘ │
 ├─────────────────────────────────────┤
-│ 📊 Admin | 🔔 Alerts | 👥 Teams     │
+│ 📊 Admin | 🔔 Alertas | 👥 Equipes  │
 └─────────────────────────────────────┘
 ```
 
 ---
 
-## 🔔 Inter-Departmental Alerts
+## 🔔 Alertas Inter-Departamentais
 
-```sh
+```
 ┌─────────────────────────────────────┐
-│ 🔔 Critical Alerts           07:15  │
+│ 🔔 Alertas Críticos          07:15  │
 ├─────────────────────────────────────┤
-│ ⚠️  EMERGENCY → CARDIOLOGY          │
+│ ⚠️  EMERGÊNCIA → CARDIOLOGIA        │
 │                                     │
-│ 👤 João Silva, 67y                  │
-│ 🚨 STEMI confirmed                  │
-│ 📍 Trauma Room 3                    │
+│ 👤 João Silva, 67a                  │
+│ 🚨 STEMI confirmado                 │
+│ 📍 Sala Trauma 3                   │
 │                                     │
-│ ❤️  Dr. Santos (Cardio) notified    │
-│ 🏥  ICU Bed 12 reserved             │
-│ 🔪  Surgery Center 3 on alert       │
+│ ❤️  Dr. Santos (Cardio) notificado  │
+│ 🏥  UTI Leito 12 reservado          │
+│ 🔪  Centro Cirúrgico 3 em alerta   │
 │                                     │
-│ [🚨 View Patient] [📞 Call Team]    │
+│ [🚨 Ver Paciente] [📞 Ligar Equipe] │
 ├─────────────────────────────────────┤
-│ ⚡  ICU → SURGERY                    │
+│ ⚡  UTI → CIRURGIA                  │
 │                                     │
-│ 👤 Ana Costa, 32y                   │
-│ 🩸 Post-operative bleeding          │
-│ 📍 ICU Bed 8                        │
+│ 👤 Ana Costa, 32a                   │
+│ 🩸 Hemorragia pós-operatória        │
+│ 📍 UTI Leito 8                     │
 │                                     │
-│ [🔪 Emergency Surgery] [🩸 Protocol]│
+│ [🔪 Cirurgia Urgente] [🩸 Protocolo]│
 └─────────────────────────────────────┘
 ```
 
 ---
 
-## 🔬 Lab Review - Dr. Roberto Silva
+## 🔬 Revisão de Labs - Dr. Roberto Silva
 
-```sh
+```
 ┌─────────────────────────────────────┐
-│ ← Carlos Mendoza, 52y        🔬     │
+│ ← Carlos Mendoza, 52a        🔬     │
 ├─────────────────────────────────────┤
-│ 📊 THYROID PANEL - 01/15/2024       │
+│ 📊 PAINEL TIREOIDIANO - 15/01/2024  │
 │                                     │
-│ 🧪 TSH: 12.5 mIU/L ⚠️ HIGH          │
-│     Reference: 0.4-4.0              │
+│ 🧪 TSH: 12.5 mIU/L ⚠️ ALTO         │
+│     Referência: 0.4-4.0             │
 │                                     │
-│ 🧪 T4: 0.8 ng/dL ⚠️ LOW             │
-│     Reference: 0.9-1.7              │
+│ 🧪 T4: 0.8 ng/dL ⚠️ BAIXO          │
+│     Referência: 0.9-1.7             │
 │                                     │
 │ ┌─────────────────────────────────┐ │
-│ │ 📈 6-MONTH TREND                │ │
+│ │ 📈 TENDÊNCIA 6 MESES            │ │
 │ │                                 │ │
-│ │ TSH │     ●                     │ │ ← Interactive chart
+│ │ TSH │     ●                     │ │ ← Gráfico interativo
 │ │  12 │   ●   ●                   │ │
 │ │   8 │ ●       ●                 │ │
-│ │   4 ├─────────────────────────  │ │ ← Reference line
-│ │     Sep  Nov  Jan  Mar  May     │ │
+│ │   4 ├─────────────────────────  │ │ ← Linha referência
+│ │     Sep  Nov  Jan  Mar  Mai     │ │
 │ └─────────────────────────────────┘ │
 │                                     │
-│ 🤖 AI: Suggests hypothyroidism      │
-│ 💊 Levothyroxine 50mcg recommended  │
+│ 🤖 IA: Sugere hipotireoidismo       │
+│ 💊 Levotiroxina 50mcg recomendada   │
 │                                     │
-│ [💊 Prescribe] [📈 View More] [📱 Notify] │
+│ [💊 Prescrever] [📈 Ver Mais] [📱 Notificar] │
 └─────────────────────────────────────┘
 ```
 
 ---
 
-## 🎤 Voice Documentation - Dr. Patricia Lima
+## 🎤 Documentação por Voz - Dra. Patricia Lima
 
-```sh
+```
 ┌─────────────────────────────────────┐
-│ ← Ana Silva, 28y             📝     │
+│ ← Ana Silva, 28a             📝     │
 ├─────────────────────────────────────┤
-│ 🎤 RECORDING CONSULTATION...  01:23 │
+│ 🎤 GRAVANDO CONSULTA...      01:23  │
 │                                     │
 │ ████████████░░░░░░░░░░░░░░░         │
 │                                     │
-│ 📝 REAL-TIME TRANSCRIPTION:         │
+│ 📝 TRANSCRIÇÃO TEMPO REAL:          │
 │ ┌─────────────────────────────────┐ │
-│ │ Patient presents chest pain for │ │
-│ │ 2 days, localized in precordial │ │
-│ │ region, without radiation.      │ │
-│ │ Denies dyspnea, palpitations... │ │
+│ │ Paciente apresenta dor no peito │ │
+│ │ há 2 dias, localizada região   │ │
+│ │ precordial, sem irradiação.     │ │
+│ │ Nega dispneia, palpitações...   │ │
 │ └─────────────────────────────────┘ │
 │                                     │
-│ ⏹️ STOP     🔄 PAUSE      🗑️ DELETE │
+│ ⏹️ PARAR     🔄 PAUSAR     🗑️ APAGAR │
 ├─────────────────────────────────────┤
-│ 🤖 AI will organize into:           │
-│ • Chief Complaint                   │
-│ • Clinical History                  │
-│ • Physical Exam                     │
-│ • Diagnostic Plan                   │
+│ 🤖 IA organizará em:                │
+│ • Queixa Principal                  │
+│ • História Clínica                  │
+│ • Exame Físico                      │
+│ • Plano Diagnóstico                 │
 └─────────────────────────────────────┘
 ```
 
 ---
 
-## 📊 Administrative Dashboard
+## 📊 Dashboard Administrativo
 
-```sh
+```
 ┌─────────────────────────────────────┐
 │ 📊 Admin Dashboard           07:30  │
 ├─────────────────────────────────────┤
-│ 🏥 REAL PORTUGUESE HOSPITAL         │
+│ 🏥 HOSPITAL REAL PORTUGUÊS          │
 │                                     │
 │ ┌─────┬─────┬─────┬─────┬─────────┐ │
-│ │ Dept│Users│Pts  │Load │ Status  │ │
+│ │ Dept│Users│Pcts │Load │ Status  │ │
 │ ├─────┼─────┼─────┼─────┼─────────┤ │
-│ │❤️Card│ 2  │ 12  │ 85% │ ✅ OK   │ │
-│ │🚨Emrg│ 1  │  3  │ 95% │ ⚠️ High │ │
-│ │🔪Surg│ 1  │  5  │ 70% │ ✅ OK   │ │
-│ │🏥ICU │ 1  │  2  │100% │ 🔴 Max  │ │
+│ │ ❤️Card│  2  │ 12  │ 85% │ ✅ OK   │ │
+│ │ 🚨Emrg│  1  │  3  │ 95% │ ⚠️ Alto│ │
+│ │ 🔪Cirg│  1  │  5  │ 70% │ ✅ OK   │ │
+│ │ 🏥UTI │  1  │  2  │100% │ 🔴 Max │ │
 │ └─────┴─────┴─────┴─────┴─────────┘ │
 │                                     │
-│ 📈 REAL-TIME METRICS:               │
-│ • Consultations today: 47           │
-│ • Prescriptions: 23                 │
-│ • Critical alerts: 2                │
-│ • Average service time: 12min       │
+│ 📈 MÉTRICAS TEMPO REAL:             │
+│ • Consultas hoje: 47                │
+│ • Prescrições: 23                   │
+│ • Alertas críticos: 2               │
+│ • Tempo médio atendimento: 12min    │
 │                                     │
-│ [📋 Reports] [⚙️ Config] [🔔 Alerts] │
+│ [📋 Relatórios] [⚙️ Config] [🔔 Alertas] │
 └─────────────────────────────────────┘
 ```
 
@@ -270,8 +270,7 @@
 ## 📱 Mobile Layout
 
 ### iPhone (Portrait)
-
-```sh
+```
 ┌───────────────┐
 │ 📱 Header     │
 ├───────────────┤
@@ -282,62 +281,57 @@
 ├───────────────┤
 │ 📝 Input 🎤   │
 ├───────────────┤
-│ ⚡ Actions     │
+│ ⚡ Actions    │
 └───────────────┘
 ```
 
-### iPad (Landscape) - Multi-Department
-
-```sh
+### iPad (Landscape) - Multi-Departamento
+```
 ┌─────────────────┬───────────────┐
 │                 │ 🏥 DASHBOARD  │
-│   💬 Main       │ ❤️ Card: 12   │
-│    Chat         │ 🚨 Emrg: 3    │
-│                 │ 🔪 Surg: 5    │
-│                 │ 🏥 ICU: 2     │
+│   💬 Chat       │ ❤️ Card: 12   │
+│    Principal    │ 🚨 Emrg: 3    │
+│                 │ 🔪 Cirg: 5    │
+│                 │ 🏥 UTI: 2     │
 │                 │               │
-│                 │ 🔔 ALERTS     │
-│                 │ ⚠️ 2 critical │
+│                 │ 🔔 ALERTAS    │
+│                 │ ⚠️ 2 críticos │
 └─────────────────┴───────────────┘
 ```
 
 ---
 
-## 🎯 Specific Hospital Workflows
+## 🎯 Fluxos Hospitalares Específicos
 
-### Morning Rounds (07:00)
-
-```sh
-🏥 Login → 🏢 Dept → 👥 Patients → 🎤 Rounds → 📝 Notes → 🔔 Alerts
+### Rounds Matinais (07:00)
+```
+🏥 Login → 🏢 Dept → 👥 Pacientes → 🎤 Rounds → 📝 Notas → 🔔 Alertas
 ```
 
-### Critical Emergency
-
-```sh
-🚨 Admission → 📋 EMR Sync → 🔔 Auto-Alert → ❤️ Consult → 🏥 ICU Prep → 📊 Protocol
+### Emergência Crítica
+```
+🚨 Admissão → 📋 EMR Sync → 🔔 Auto-Alert → ❤️ Consulta → 🏥 UTI Prep → 📊 Protocolo
 ```
 
-### Lab Review
-
-```sh
-🔬 Select → 📄 Upload → 📈 Charts → 🎤 Consult → 💊 Prescription → 📱 Notify
+### Revisão Labs
+```
+🔬 Selecionar → 📄 Upload → 📈 Gráficos → 🎤 Consulta → 💊 Prescrição → 📱 Notificar
 ```
 
-### Documentation
-
-```sh
-👩‍⚕️ Patient → 🎤 Record → 🤖 Transcribe → ✏️ Review → 📝 Structure → 💾 Save
+### Documentação
+```
+👩‍⚕️ Paciente → 🎤 Gravar → 🤖 Transcrever → ✏️ Revisar → 📝 Estruturar → 💾 Salvar
 ```
 
 ---
 
-## ✨ Hospital Microinteractions
+## ✨ Microinterações Hospitalares
 
-- **🏥 Department login**: Animation for selected department
-- **🔔 Critical alerts**: Vibration + specific sound by urgency
-- **📈 Lab charts**: Touch zoom with hover details
-- **🎤 Voice rounds**: Visual pulse during recording
-- **👥 Team status**: Real-time online/offline indicators
-- **⚠️ Inter-departmental alerts**: Slide-in notification with action
+- **🏥 Login departamental**: Animação departamento selecionado
+- **🔔 Alertas críticos**: Vibração + som específico por urgência
+- **📈 Gráficos labs**: Zoom touch com detalhes hover
+- **🎤 Rounds por voz**: Pulse visual durante gravação
+- **👥 Status equipe**: Indicadores tempo real online/offline
+- **⚠️ Alertas interdepartamentais**: Notificação slide-in com ação
 
-Now the design is fully integrated with real hospital use cases! 🏥✨ 
+Agora o design está totalmente integrado com os casos de uso hospitalares reais! 🏥✨

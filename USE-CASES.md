@@ -1,525 +1,530 @@
-# 🏥 Casos de Uso e Fluxos Departamentais de Escala Hospitalar
+# 🏥 Hospital-Scale Use Cases and Departmental Workflows
 
-Esta seção delineia casos de uso abrangentes para a plataforma médica Prontuário MVP, focando em funcionalidades que atendem instituições de médio porte como o Hospital Real Português com 200 usuários diários em múltiplos departamentos e especialidades.
+This section outlines comprehensive use cases for the Medical Record MVP platform, focusing on functionalities that serve medium-sized institutions like Real Portuguese Hospital with 200 daily users across multiple departments and specialties.
 
 ---
 
-## 🏥 Caso de Uso 1: Coordenação de Rounds Matinais Multi-Departamentais
+## 🏥 Use Case 1: Multi-Departmental Morning Rounds Coordination
 
-### Contexto: Hospital Real Português - 7:00 AM Rounds Hospitalares
+### Context: Real Portuguese Hospital - 7:00 AM Hospital Rounds
 
-### Escala: 20 médicos em 4 departamentos principais iniciando rounds matinais simultaneamente
+### Scale: 20 doctors across 4 main departments starting morning rounds simultaneously
 
-- **Departamento de Cardiologia**: 2 médicos revisando 12 pacientes cardíacos
-- **Medicina de Emergência**: 1 médico gerenciando 3 casos de emergência  
-- **Departamento de Cirurgia**: 1 cirurgião revisando 5 pacientes pré/pós-operatório
-- **Unidades de UTI**: 1 intensivista gerenciando 2 pacientes de cuidados críticos
+- **Cardiology Department**: 2 doctors reviewing 12 cardiac patients
+- **Emergency Medicine**: 1 doctor managing 3 emergency cases  
+- **Surgery Department**: 1 surgeon reviewing 5 pre/post-operative patients
+- **ICU Units**: 1 intensivist managing 2 critical care patients
 
-### Interface Visual - Seleção de Departamento (07:00)
+### Visual Interface - Department Selection (07:00)
 
 ```
 ┌─────────────────────────────────────┐
-│ 🏥 Hospital Real Português   07:00  │ ← 20 médicos fazendo login
+│ 🏥 Real Portuguese Hospital   07:00 │ ← 20 doctors logging in
 ├─────────────────────────────────────┤
-│ 👨‍⚕️ Dr. Silva, bem-vindo aos rounds │
+│ 👨‍⚕️ Dr. Silva, welcome to rounds     │
 │                                     │
 │ ┌─────────────────────────────────┐ │
-│ │ ❤️  CARDIOLOGIA           12👥  │ │ ← Dr. Santos + Dr. Lima
-│ │     2 médicos • 12 pacientes   │ │   (Insuficiência cardíaca)
-│ │     Status: 🟢 Rounds ativos   │ │
+│ │ ❤️  CARDIOLOGY            12👥  │ │ ← Dr. Santos + Dr. Lima
+│ │     2 doctors • 12 patients     │ │   (Heart failure)
+│ │     Status: 🟢 Active rounds    │ │
 │ └─────────────────────────────────┘ │
 │                                     │
 │ ┌─────────────────────────────────┐ │
-│ │ 🚨  EMERGÊNCIA             3👥  │ │ ← Dr. Costa
-│ │     1 médico • 3 críticos      │ │   (STEMI, trauma, sepse)
-│ │     Status: 🔴 Alta demanda    │ │
+│ │ 🚨  EMERGENCY              3👥  │ │ ← Dr. Costa
+│ │     1 doctor • 3 critical       │ │   (STEMI, trauma, sepsis)
+│ │     Status: 🔴 High demand      │ │
 │ └─────────────────────────────────┘ │
 │                                     │
 │ ┌─────────────────────────────────┐ │
-│ │ 🔪  CIRURGIA               5👥  │ │ ← Dr. Oliveira
-│ │     1 cirurgião • 5 pré/pós    │ │   (Colecistectomias)
-│ │     Status: 🟡 Rounds parciais │ │
+│ │ 🔪  SURGERY                5👥  │ │ ← Dr. Oliveira
+│ │     1 surgeon • 5 pre/post      │ │   (Cholecystectomies)
+│ │     Status: 🟡 Partial rounds   │ │
 │ └─────────────────────────────────┘ │
 │                                     │
 │ ┌─────────────────────────────────┐ │
-│ │ 🏥  UTI                    2👥  │ │ ← Dr. Ferreira
-│ │     1 intensivista • 2 críticos│ │   (Ventilação mecânica)
-│ │     Status: 🔴 Capacidade max  │ │
+│ │ 🏥  ICU                    2👥  │ │ ← Dr. Ferreira
+│ │     1 intensivist • 2 critical  │ │   (Mechanical ventilation)
+│ │     Status: 🔴 Max capacity     │ │
 │ └─────────────────────────────────┘ │
 ├─────────────────────────────────────┤
-│ 📊 Admin Dashboard | 🔔 Alertas | 👥 │
+│ 📊 Admin Dashboard | 🔔 Alerts | 👥 │
 └─────────────────────────────────────┘
 ```
 
-### Interface - Lista Cardiologia (Dr. Santos)
+### Interface - Cardiology List (Dr. Santos)
 
 ```
 ┌─────────────────────────────────────┐
-│ ← ❤️ Cardiologia             07:15  │
+│ ← ❤️ Cardiology              07:15  │
 ├─────────────────────────────────────┤
-│ 🔍 Buscar pacientes cardíacos...    │
+│ 🔍 Search cardiac patients...       │
 ├─────────────────────────────────────┤
-│ Todos | Críticos 🔴 2 | Estáveis ✅ │
+│ All | Critical 🔴 2 | Stable ✅     │
 ├─────────────────────────────────────┤
 │                                     │
-│ 👤  João Silva, 67a          🔴     │
-│     💔 IAM STEMI - Cateterismo hoje │
-│     Dr. Santos • Leito 12           │
+│ 👤  João Silva, 67y          🔴     │
+│     💔 STEMI MI - Cath today        │
+│     Dr. Santos • Bed 12             │
 │     ─────────────────────────────   │
 │                                     │
-│ 👤  Maria Santos, 72a        🟡     │
-│     💓 ICC descompensada            │
-│     Dr. Lima • Leito 8              │
+│ 👤  Maria Santos, 72y        🟡     │
+│     💓 Decompensated CHF            │
+│     Dr. Lima • Bed 8                │
 │     ─────────────────────────────   │
 │                                     │
-│ 👤  Carlos Costa, 58a        ✅     │
-│     🫀 Pós-angioplastia estável     │
-│     Dr. Santos • Leito 15           │
+│ 👤  Carlos Costa, 58y        ✅     │
+│     🫀 Post-angioplasty stable      │
+│     Dr. Santos • Bed 15             │
 │     ─────────────────────────────   │
 │                                     │
-│ [+9 pacientes mais...]              │
+│ [+9 more patients...]               │
 ├─────────────────────────────────────┤
-│ 🎤 Iniciar Rounds | 📊 Métricas     │
+│ 🎤 Start Rounds | 📊 Metrics        │
 └─────────────────────────────────────┘
 ```
 
-### Benefícios Empresariais
+### Enterprise Benefits
 
-- **🏥 Eficiência de Escala Hospitalar**: 20 médicos iniciando rounds simultaneamente
-- **🔄 Coordenação Departamental**: Comunicação inter-departamental em tempo real  
-- **📊 Supervisão Administrativa**: Métricas hospitalares e gestão de recursos
-- **🤖 Inteligência Compartilhada**: Insights de IA acessíveis em todos os departamentos
+- **🏥 Hospital-Scale Efficiency**: 20 doctors starting rounds simultaneously
+- **🔄 Departmental Coordination**: Real-time inter-departmental communication  
+- **📊 Administrative Oversight**: Hospital metrics and resource management
+- **🤖 Shared Intelligence**: AI insights accessible across all departments
 
-### Fluxo Visual - Rounds Matinais
+### Visual Flow - Morning Rounds
 
 ```
 ┌─────────────────────────────────────┐
-│ 🔄 FLUXO ROUNDS MATINAIS (07:00)    │
+│ 🔄 MORNING ROUNDS FLOW (07:00)      │
 ├─────────────────────────────────────┤
 │                                     │
 │ 🔐 Login                            │
 │  │                                  │
 │  ▼                                  │
-│ 🏢 Selecionar Departamento          │
+│ 🏢 Select Department                │
 │  │                                  │
 │  ▼                                  │
-│ 👥 Ver Lista Pacientes              │
+│ 👥 View Patient List                │
 │  │                                  │
 │  ▼                                  │
-│ 🎤 Iniciar Rounds por Voz           │
+│ 🎤 Start Voice Rounds               │
 │  │                                  │
 │  ▼                                  │
-│ 📝 Documentar                       │
+│ 📝 Document                         │
 │  │                                  │
 │  ▼                                  │
-│ 🔔 Alertas Automáticos              │
+│ 🔔 Automatic Alerts                 │
 │                                     │
 └─────────────────────────────────────┘
 ```
 
 ---
 
-## 🚨 Caso de Uso 2: Integração do Departamento de Emergência com Sistemas Hospitalares
+## 🚨 Use Case 2: Emergency Department Integration with Hospital Systems
 
-### Contexto: Departamento de Medicina de Emergência - Operações 24/7
-### Escala: 3 médicos de emergência, 5 enfermeiros, 1.000+ visitas de emergência anuais
+### Context: Emergency Medicine Department - 24/7 Operations
+### Scale: 3 emergency doctors, 5 nurses, 1,000+ annual emergency visits
 
-- **Desafio de Integração**: Casos de emergência requerendo coordenação hospitalar imediata
-- **Integração EMR**: Sincronização em tempo real com prontuários eletrônicos médicos hospitalares existentes
-- **Alertas Inter-Departamentais**: Coordenação UTI, Cirurgia, Cardiologia para casos críticos
+- **Integration Challenge**: Emergency cases requiring immediate hospital coordination
+- **EMR Integration**: Real-time synchronization with existing hospital electronic medical records
+- **Inter-Departmental Alerts**: ICU, Surgery, Cardiology coordination for critical cases
 
-### Interface Visual - Emergência Crítica
+### Visual Interface - Critical Emergency
 
 ```
 ┌─────────────────────────────────────┐
-│ 🚨 EMERGÊNCIA - Sala Trauma 3       │
+│ 🚨 EMERGENCY - Trauma Room 3        │
 ├─────────────────────────────────────┤
-│ 👤 JOÃO SILVA, 67a • Registro #7823 │
-│ ⏰ Chegada: 07:23 • Prioridade: 🔴  │
+│ 👤 JOÃO SILVA, 67y • Record #7823   │
+│ ⏰ Arrival: 07:23 • Priority: 🔴    │
 │                                     │
-│ 🫀 STEMI CONFIRMADO                 │
-│ 📍 Dor precordial há 45min          │
-│ 🩺 PA: 85/60 • FC: 110 • Sat: 94%   │
+│ 🫀 STEMI CONFIRMED                  │
+│ 📍 Precordial chest pain 45min      │
+│ 🩺 BP: 85/60 • HR: 110 • Sat: 94%   │
 │                                     │
-│ 📋 EMR SINCRONIZADO:                │
-│ • Diabetes tipo 2 (10 anos)        │
-│ • Hipertensão arterial              │
-│ • Alergia: Penicilina               │
-│ • Última consulta: 15/12/2024      │
+│ 📋 EMR SYNCHRONIZED:                │
+│ • Type 2 diabetes (10 years)        │
+│ • Arterial hypertension             │
+│ • Allergy: Penicillin               │
+│ • Last visit: 12/15/2024            │
 │                                     │
-│ 🔔 ALERTAS AUTOMÁTICOS ENVIADOS:    │
-│ ✅ Dr. Santos (Cardio) notificado   │
-│ ✅ UTI Leito 12 reservado           │
-│ ✅ Centro Cirúrgico 3 em standby    │
-│ ✅ Banco sangue tipo O+ separado    │
+│ 🔔 AUTOMATIC ALERTS SENT:           │
+│ ✅ Dr. Santos (Cardio) notified     │
+│ ✅ ICU Bed 12 reserved              │
+│ ✅ Surgery Center 3 on standby      │
+│ ✅ Blood bank O+ separated          │
 │                                     │
-│ [🚨 Protocolo STEMI] [📞 Equipe] [📋 EMR] │
+│ [🚨 STEMI Protocol] [📞 Team] [📋 EMR] │
 └─────────────────────────────────────┘
 ```
 
-### Interface - Alertas Inter-Departamentais
+### Interface - Inter-Departmental Alerts
 
 ```
 ┌─────────────────────────────────────┐
-│ 🔔 ALERTA CRÍTICO            07:24  │
+│ 🔔 CRITICAL ALERT            07:24  │
 ├─────────────────────────────────────┤
-│ 🚨 EMERGÊNCIA → ❤️ CARDIOLOGIA      │
+│ 🚨 EMERGENCY → ❤️ CARDIOLOGY        │
 │                                     │
-│ 👤 João Silva, 67a                  │
-│ 💔 STEMI - Parede anterior          │
-│ ⏰ Início sintomas: 06:38           │
-│ 📍 Sala Trauma 3 → Hemodinâmica    │
+│ 👤 João Silva, 67y                  │
+│ 💔 STEMI - Anterior wall            │
+│ ⏰ Symptom onset: 06:38             │
+│ 📍 Trauma Room 3 → Cath Lab         │
 │                                     │
-│ 📊 PROTOCOLO ATIVADO:               │
-│ • Tempo porta-balão: <90min ⏱️     │
-│ • AAS 300mg + Clopidogrel ✅       │
-│ • Heparina não-fracionada ✅       │
-│ • Cateterismo de emergência 🔄     │
+│ 📊 PROTOCOL ACTIVATED:              │
+│ • Door-to-balloon time: <90min ⏱️   │
+│ • ASA 300mg + Clopidogrel ✅        │
+│ • Unfractionated heparin ✅         │
+│ • Emergency catheterization 🔄      │
 │                                     │
-│ 👨‍⚕️ Dr. Santos: "A caminho - 5min"  │
-│ 🏥 UTI: "Leito 12 pronto"           │
-│ 🔪 Cirurgia: "Standby confirmado"   │
+│ 👨‍⚕️ Dr. Santos: "On my way - 5min"   │
+│ 🏥 ICU: "Bed 12 ready"              │
+│ 🔪 Surgery: "Standby confirmed"     │
 │                                     │
-│ [📱 Aceitar Caso] [📞 Ligar] [📋 Ver EMR] │
+│ [📱 Accept Case] [📞 Call] [📋 View EMR] │
 └─────────────────────────────────────┘
 ```
 
-### Ganhos de Eficiência de Consulta
+### Consultation Efficiency Gains
 
-- **📊 Preparação Pré-visita**: 2 minutos vs 10 minutos revisão de prontuário
-- **🎤 Documentação por Voz**: Anotações em tempo real enquanto conversa
-- **🤖 Assistência Médica Básica**: Sugestões simples de tratamento
-- **📝 Notas Simplificadas**: Suporte documentação estruturada
+- **📊 Pre-visit Preparation**: 2 minutes vs 10 minutes chart review
+- **🎤 Voice Documentation**: Real-time notes while conversing
+- **🤖 Basic Medical Assistance**: Simple treatment suggestions
+- **📝 Simplified Notes**: Structured documentation support
 
-### Fluxo Visual - Emergência Crítica
+### Visual Flow - Critical Emergency
 
-```
+```sh
 ┌─────────────────────────────────────┐
-│ 🚨 FLUXO EMERGÊNCIA CRÍTICA         │
+│ 🚨 CRITICAL EMERGENCY FLOW          │
 ├─────────────────────────────────────┤
 │                                     │
-│ 🚑 Admissão Emergência              │
+│ 🚑 Emergency Admission              │
 │  │                                  │
 │  ▼                                  │
-│ 📋 EMR Sync Automático              │
+│ 📋 Automatic EMR Sync               │
 │  │                                  │
 │  ▼                                  │
-│ 🔔 Alertas Multi-Departamentais     │
+│ 🔔 Multi-Departmental Alerts        │
 │  │                                  │
-│  ├─► ❤️ Cardiologia                │
-│  ├─► 🏥 UTI                        │
-│  └─► 🔪 Cirurgia                   │
+│  ├─► ❤️ Cardiology                  │
+│  ├─► 🏥 ICU                         │
+│  └─► 🔪 Surgery                     │
 │                                     │
 │  ▼                                  │
-│ 📊 Coordenação Protocolos           │
+│ 📊 Protocol Coordination            │
 │  │                                  │
 │  ▼                                  │
-│ 📝 Documentação Tempo Real          │
+│ 📝 Real-Time Documentation          │
 │                                     │
 └─────────────────────────────────────┘
 ```
 
 ---
 
-## 🔬 Caso de Uso 3: Revisão Simples de Resultados Laboratoriais
+## 🔬 Use Case 3: Simple Laboratory Results Review
 
-### Persona: Dr. Roberto Silva - Endocrinologista
+### Persona: Dr. Roberto Silva - Endocrinologist
 
-- **Experiência**: 10 anos, especialista em diabetes e distúrbios hormonais
-- **Contexto**: Sessão semanal de revisão de resultados laboratoriais
-- **Desafio**: Analisar painéis laboratoriais eficientemente
+- **Experience**: 10 years, diabetes and hormonal disorders specialist
+- **Context**: Weekly laboratory results review session
+- **Challenge**: Efficiently analyze laboratory panels
 
-### Interface Visual - Revisão de Labs
+### Visual Interface - Lab Review
 
-```
+```sh
 ┌─────────────────────────────────────┐
-│ ← Carlos Mendoza, 52a        🔬     │
+│ ← Carlos Mendoza, 52y        🔬     │
 ├─────────────────────────────────────┤
-│ 📊 PAINEL TIREOIDIANO - 15/01/2024  │
+│ 📊 THYROID PANEL - 01/15/2024       │
 │                                     │
-│ 🧪 TSH: 12.5 mIU/L ⚠️ ALTO         │
-│     Referência: 0.4-4.0             │
-│     Resultado anterior: 8.2 ⬆️      │
+│ 🧪 TSH: 12.5 mIU/L ⚠️ HIGH          │
+│     Reference: 0.4-4.0              │
+│     Previous result: 8.2 ⬆️         │
 │                                     │
-│ 🧪 T4 Livre: 0.8 ng/dL ⚠️ BAIXO    │
-│     Referência: 0.9-1.7             │
-│     Resultado anterior: 1.1 ⬇️      │
+│ 🧪 Free T4: 0.8 ng/dL ⚠️ LOW        │
+│     Reference: 0.9-1.7              │
+│     Previous result: 1.1 ⬇️         │
 │                                     │
 │ ┌─────────────────────────────────┐ │
-│ │ 📈 TENDÊNCIA ÚLTIMOS 6 MESES    │ │
+│ │ 📈 LAST 6 MONTHS TREND          │ │
 │ │                                 │ │
-│ │ TSH │         ●               │ │ ← 12.5 atual
+│ │ TSH │         ●               │ │ ← 12.5 current
 │ │  12 │       ●                 │ │ ← 8.2 (Nov)
-│ │   8 │     ●                   │ │ ← 6.1 (Set)
-│ │   4 ├─────●───────────────────  │ │ ← Linha normal
-│ │   0 │   ●                     │ │ ← 2.1 inicial
-│ │     Set Nov Jan Mar Mai Jul   │ │
+│ │   8 │     ●                   │ │ ← 6.1 (Sep)
+│ │   4 ├─────●───────────────────  │ │ ← Normal line
+│ │   0 │   ●                     │ │ ← 2.1 initial
+│ │     Sep Nov Jan Mar May Jul   │ │
 │ └─────────────────────────────────┘ │
 │                                     │
-│ 🤖 IA ANÁLISE:                      │
-│ • Hipotireoidismo primário          │
-│ • Progressão desde setembro         │
-│ • Necessário ajuste medicação       │
+│ 🤖 AI ANALYSIS:                     │
+│ • Primary hypothyroidism            │
+│ • Progression since September       │
+│ • Medication adjustment needed      │
 │                                     │
-│ 💊 RECOMENDAÇÃO:                    │
-│ Levotiroxina 75mcg (⬆️ de 50mcg)    │
-│ Controle em 6-8 semanas             │
+│ 💊 RECOMMENDATION:                  │
+│ Levothyroxine 75mcg (⬆️ from 50mcg) │
+│ Follow-up in 6-8 weeks              │
 │                                     │
-│ [💊 Prescrever] [📈 Histórico] [📱 Notificar] │
+│ [💊 Prescribe] [📈 History] [📱 Notify] │
 └─────────────────────────────────────┘
 ```
 
-### Interface - Chat com IA Laboratorial
+### Interface - Lab AI Chat
 
-```
+```sh
 ┌─────────────────────────────────────┐
 │ ← Carlos Mendoza                🔬  │
 ├─────────────────────────────────────┤
 │                                     │
 │     ┌─────────────────────────────┐ │
-│     │ Que medicamento você        │ │ ← Dr. Roberto
-│     │ recomendaria para este TSH? │ │
-│     │                       ✓✓   │ │
+│     │ What medication would you   │ │ ← Dr. Roberto
+│     │ recommend for this TSH?     │ │
+│     │                       ✓✓    │ │
 │     └─────────────────────────────┘ │
 │                               14:25 │
 │                                     │
-│ 🤖 IA Laboratorial                  │
+│ 🤖 Laboratory AI                    │
 │ ┌─────────────────────────────────┐ │
-│ │ 💊 RECOMENDAÇÃO TIREOIDIANA     │ │ ← Resposta IA
+│ │ 💊 THYROID RECOMMENDATION       │ │ ← AI Response
 │ │                                 │ │
-│ │ Com TSH 12.5 e T4 baixo:        │ │
+│ │ With TSH 12.5 and low T4:       │ │
 │ │                                 │ │
-│ │ 🟢 Levotiroxina 75mcg           │ │
-│ │ • Manhã, jejum, 1 comprimido    │ │
-│ │ • Evitar café, cálcio, ferro    │ │
-│ │ • Controle em 6-8 semanas       │ │
+│ │ 🟢 Levothyroxine 75mcg          │ │
+│ │ • Morning, fasting, 1 tablet    │ │
+│ │ • Avoid coffee, calcium, iron   │ │
+│ │ • Follow-up in 6-8 weeks        │ │
 │ │                                 │ │
-│ │ ⚠️  Considerar fatores:          │ │
-│ │ • Idade: 52 anos - dose padrão  │ │
-│ │ • Sem cardiopatia conhecida     │ │ 
-│ │ • Progressão desde setembro     │ │
+│ │ ⚠️  Consider factors:           │ │
+│ │ • Age: 52 years - standard dose │ │
+│ │ • No known heart disease        │ │ 
+│ │ • Progression since September   │ │
 │ │                                 │ │
-│ │ [💊 Prescrever] [📊 Protocolo]  │ │
+│ │ [💊 Prescribe] [📊 Protocol]    │ │
 │ └─────────────────────────────────┘ │
 │ 14:25                               │
 ├─────────────────────────────────────┤
-│ Digite ou fale sua próxima pergunta │
+│ Type or speak your next question    │
 │                         🎤 📎 ↗️    │
 └─────────────────────────────────────┘
 ```
 
-### Recursos Básicos de Laboratório
+### Basic Laboratory Features
 
-- **📄 Entrada Simples**: Entrada manual ou upload básico de arquivo
-- **📈 Gráficos Tendência Interativos**: Gráficos visuais série temporal com comparação histórica
-- **⚠️ Sinalizar Valores**: Destacar resultados anormais
-- **💊 Orientação Básica**: Sugestões simples de tratamento
-- **💊 Busca Medicamentos**: Informações básicas medicamentos e interações
+- **📄 Simple Entry**: Manual entry or basic file upload
+- **📈 Interactive Trend Charts**: Visual time series charts with historical comparison
+- **⚠️ Flag Values**: Highlight abnormal results
+- **💊 Basic Guidance**: Simple treatment suggestions
+- **💊 Medication Search**: Basic medication information and interactions
 
-### 🎤 Exemplo Consulta por Voz: "Mostre-me tendência nas últimas 48h"
+### 🎤 Voice Query Example: "Show me the trend for the last 48 hours"
 
-**Comando**: "Mostre-me tendência nas últimas 48h"
+**Command**: "Show me the trend for the last 48 hours"
 
-**Resposta Visual**: 
-- 📈 **Gráfico linha série temporal** com eixo-X mostrando linha tempo 48 horas
-- 📊 **Eixo-Y** mostrando valores parâmetros (PA, frequência cardíaca, glicose, etc.)
-- 🎯 **Pontos interativos** para cada medição com detalhes hover
-- 📱 **Touch-friendly** zoom e pan para dispositivos móveis
-- ⚠️ **Marcadores alerta** para valores fora da faixa destacados no gráfico
+**Visual Response**: 
 
-### Fluxo Visual - Revisão Labs
+- 📈 **Time series line chart** with X-axis showing 48-hour timeline
+- 📊 **Y-axis** showing parameter values (BP, heart rate, glucose, etc.)
+- 🎯 **Interactive points** for each measurement with hover details
+- 📱 **Touch-friendly** zoom and pan for mobile devices
+- ⚠️ **Alert markers** for out-of-range values highlighted on chart
 
-```
+### Visual Flow - Lab Review
+
+```sh
 ┌─────────────────────────────────────┐
-│ 🔬 FLUXO REVISÃO LABORATORIAL       │
+│ 🔬 LABORATORY REVIEW FLOW           │
 ├─────────────────────────────────────┤
 │                                     │
-│ 👤 Selecionar Paciente              │
+│ 👤 Select Patient                   │
 │  │                                  │
 │  ▼                                  │
-│ 📄 Upload/Entrada Labs              │
+│ 📄 Upload/Enter Labs                │
 │  │                                  │
 │  ▼                                  │
-│ 🤖 Análise IA Automática            │
+│ 🤖 Automatic AI Analysis            │
 │  │                                  │
 │  ▼                                  │
-│ 📈 Gráficos + Tendências            │
+│ 📈 Charts + Trends                  │
 │  │                                  │
 │  ▼                                  │
-│ 🎤 Chat por Voz                     │
+│ 🎤 Voice Chat                       │
 │  │                                  │
 │  ▼                                  │
-│ 💊 Prescrição                       │
+│ 💊 Prescription                     │
 │  │                                  │
 │  ▼                                  │
-│ 📱 Notificação Paciente             │
+│ 📱 Patient Notification             │
 │                                     │
 └─────────────────────────────────────┘
 ```
 
 ---
 
-## 📱 Caso de Uso 4: Documentação Básica de Pacientes
+## 📱 Use Case 4: Basic Patient Documentation
 
-### Persona: Dra. Patricia Lima - Clínica Geral
+### Persona: Dr. Patricia Lima - General Practice
 
-- **Experiência**: 10 anos em medicina geral
-- **Contexto**: Visitas padrão de pacientes e documentação
-- **Desafio**: Documentação eficiente sem complexidade
+- **Experience**: 10 years in general medicine
+- **Context**: Standard patient visits and documentation
+- **Challenge**: Efficient documentation without complexity
 
-### Interface Visual - Documentação por Voz
+### Visual Interface - Voice Documentation
 
 ```
 ┌─────────────────────────────────────┐
-│ ← Ana Silva, 28a             📝     │
+│ ← Ana Silva, 28y             📝     │
 ├─────────────────────────────────────┤
-│ 🎤 GRAVANDO CONSULTA...      01:47  │
+│ 🎤 RECORDING CONSULTATION... 01:47  │
 │                                     │
-│ ██████████████████░░░░░░░░░░        │ ← 75% progresso
+│ ██████████████████░░░░░░░░░░        │ ← 75% progress
 │                                     │
-│ 📝 TRANSCRIÇÃO TEMPO REAL:          │
+│ 📝 REAL-TIME TRANSCRIPTION:         │
 │ ┌─────────────────────────────────┐ │
-│ │ "Paciente de 28 anos, feminina,│ │
-│ │ apresenta dor no peito há 2     │ │
-│ │ dias, localizada em região     │ │
-│ │ precordial, sem irradiação.     │ │
-│ │ Nega dispneia, palpitações,    │ │
-│ │ síncope. Dor piora com esforço  │ │
-│ │ e melhora com repouso."         │ │
+│ │ "28-year-old female patient     │ │
+│ │ presents with chest pain for 2  │ │
+│ │ days, localized in precordial   │ │
+│ │ region, without radiation.      │ │
+│ │ Denies dyspnea, palpitations,   │ │
+│ │ syncope. Pain worsens with      │ │
+│ │ effort and improves with rest." │ │
 │ └─────────────────────────────────┘ │
 │                                     │
-│ ⏹️ PARAR     🔄 PAUSAR     🗑️ APAGAR │
+│ ⏹️ STOP      🔄 PAUSE     🗑️ DELETE │
 ├─────────────────────────────────────┤
-│ 🤖 IA ORGANIZARÁ AUTOMATICAMENTE:   │
-│ • 📋 Queixa Principal               │
-│ • 📖 História Doença Atual          │
-│ • 🔍 Exame Físico                   │
-│ • 🎯 Hipóteses Diagnósticas         │
-│ • 📝 Plano Terapêutico              │
+│ 🤖 AI WILL AUTOMATICALLY ORGANIZE:  │
+│ • 📋 Chief Complaint                │
+│ • 📖 History of Present Illness     │
+│ • 🔍 Physical Examination           │
+│ • 🎯 Diagnostic Hypotheses          │
+│ • 📝 Treatment Plan                 │
 └─────────────────────────────────────┘
 ```
 
-### Interface - Nota Médica Estruturada Final
+### Interface - Final Structured Medical Note
 
 ```
 ┌─────────────────────────────────────┐
-│ 📋 NOTA MÉDICA - Ana Silva          │
+│ 📋 MEDICAL NOTE - Ana Silva         │
 ├─────────────────────────────────────┤
-│ 📅 15/01/2024 14:30 | Dra. Patricia │
+│ 📅 01/15/2024 14:30 | Dr. Patricia  │
 │                                     │
-│ 📋 QUEIXA PRINCIPAL                 │
-│ Dor no peito há 2 dias              │
+│ 📋 CHIEF COMPLAINT                  │
+│ Chest pain for 2 days               │
 │                                     │
-│ 📖 HISTÓRIA DOENÇA ATUAL            │
-│ Paciente feminina, 28 anos, refere  │
-│ dor em região precordial, início há │
-│ 2 dias, sem irradiação. Piora com   │
-│ esforço, melhora repouso. Nega      │
-│ dispneia, palpitações, síncope.     │
+│ 📖 HISTORY OF PRESENT ILLNESS       │
+│ 28-year-old female patient reports  │
+│ precordial chest pain, onset 2 days │
+│ ago, without radiation. Worsens     │
+│ with effort, improves with rest.    │
+│ Denies dyspnea, palpitations,       │
+│ syncope.                            │
 │                                     │
-│ 🔍 EXAME FÍSICO                     │
-│ BEG, corada, hidratada, afebril     │
-│ PA: 120/80 mmHg | FC: 78 bpm        │
-│ FR: 16 ipm | Tax: 36.5°C            │
-│ AC: RCR 2T BNF | s/ sopros          │
-│ AP: MV + bilateralmente             │
+│ 🔍 PHYSICAL EXAMINATION             │
+│ Good general condition, pink,       │
+│ hydrated, afebrile                  │
+│ BP: 120/80 mmHg | HR: 78 bpm        │
+│ RR: 16 rpm | Temp: 36.5°C           │
+│ Heart: Regular rhythm, no murmurs   │
+│ Lungs: Clear bilaterally            │
 │                                     │
-│ 🎯 HIPÓTESE DIAGNÓSTICA             │
-│ Dor torácica atípica                │
-│ A/E: componente osteomuscular       │
+│ 🎯 DIAGNOSTIC HYPOTHESIS            │
+│ Atypical chest pain                 │
+│ R/O: Musculoskeletal component      │
 │                                     │
-│ 📝 PLANO                            │
+│ 📝 PLAN                             │
 │ • ECG                               │
-│ • Retorno em 7 dias ou se piora     │
-│ • Orientação sobre sinais alarme    │
+│ • Return in 7 days or if worsens    │
+│ • Education on warning signs        │
 │                                     │
-│ [💾 Salvar] [📧 Enviar] [✏️ Editar]  │
+│[💾 Save]  [📧 Send] [✏️ Edit]       │
 └─────────────────────────────────────┘
 ```
 
-### Benefícios de Documentação
+### Documentation Benefits
 
-- **🎤 Entrada por Voz**: Documentação hands-free durante consulta
-- **🤖 Processamento IA**: Reconhecimento termos médicos e estruturação automática
-- **📝 Formato Estruturado**: Notas médicas organizadas em seções padrão
-- **💾 Armazenamento Simples**: Gestão básica de registros com controle de versão
-- **⏱️ Economia de Tempo**: Redução de 15min para 3min na documentação
+- **🎤 Voice Entry**: Hands-free documentation during consultation
+- **🤖 AI Processing**: Medical terminology recognition and automatic structuring
+- **📝 Structured Format**: Medical notes organized in standard sections
+- **💾 Simple Storage**: Basic record management with version control
+- **⏱️ Time Savings**: Reduction from 15min to 3min in documentation
 
-### Fluxo Visual - Documentação
+### Visual Flow - Documentation
 
 ```
 ┌─────────────────────────────────────┐
-│ 📝 FLUXO DOCUMENTAÇÃO CONSULTA      │
+│ 📝 CONSULTATION DOCUMENTATION FLOW  │
 ├─────────────────────────────────────┤
 │                                     │
-│ 👩‍⚕️ Abrir Paciente                  │
+│ 👩‍⚕️ Open Patient                     │
 │  │                                  │
 │  ▼                                  │
-│ 🎤 Gravar por Voz                   │
+│ 🎤 Record by Voice                  │
 │  │                                  │
 │  ▼                                  │
-│ 🤖 IA Transcreve                    │
+│ 🤖 AI Transcribes                   │
 │  │                                  │
 │  ▼                                  │
-│ ✏️ Revisar/Editar                   │
+│ ✏️ Review/Edit                      │
 │  │                                  │
 │  ▼                                  │
-│ 📋 Estruturar Automaticamente       │
+│ 📋 Automatically Structure          │
 │  │                                  │
 │  ▼                                  │
-│ 💾 Salvar                           │
+│ 💾 Save                             │
 │                                     │
 └─────────────────────────────────────┘
 ```
 
 ---
 
-## 📊 Métricas de Impacto Hospitalar
+## 📊 Hospital Impact Metrics
 
-### Eficiência Operacional
-- **⏱️ Tempo Rounds**: 45min → 25min por departamento
-- **🔄 Coordenação Inter-departamental**: 73% melhoria na comunicação
-- **📋 Documentação**: 15min → 3min por consulta
-- **🎯 Precisão Diagnóstica**: 12% aumento com apoio IA
+### Operational Efficiency
 
-### Indicadores de Qualidade
-- **📱 Adoção por Médicos**: 85% em 30 dias (20 médicos)
-- **🔔 Tempo Resposta Alertas**: 8min → 2min
-- **📊 Satisfação Equipe**: 4.2/5.0 rating
-- **💰 ROI Hospitalar**: 23% redução custos operacionais
+- **⏱️ Rounds Time**: 45min → 25min per department
+- **🔄 Inter-departmental Coordination**: 73% improvement in communication
+- **📋 Documentation**: 15min → 3min per consultation
+- **🎯 Diagnostic Accuracy**: 12% increase with AI support
 
-### Casos de Uso Resumidos
+### Quality Indicators
 
-| **Caso de Uso** | **Usuários** | **Benefício Principal** | **Economia Tempo** |
-|-----------------|--------------|-------------------------|-------------------|
-| **🏥 Rounds Matinais** | 20 médicos, 4 departamentos | Coordenação simultânea | 44% redução |
-| **🚨 Emergência** | 3 médicos, 5 enfermeiros | Alertas automáticos | 75% resposta |
-| **🔬 Labs** | Endocrinologistas | Análise IA + gráficos | 60% revisão |
-| **📝 Documentação** | Clínica geral | Transcrição por voz | 80% escrita |
+- **📱 Doctor Adoption**: 85% in 30 days (20 doctors)
+- **🔔 Alert Response Time**: 8min → 2min
+- **📊 Team Satisfaction**: 4.2/5.0 rating
+- **💰 Hospital ROI**: 23% reduction in operational costs
 
-### Fluxo Visual - ROI Hospitalar
+### Use Case Summary
+
+| **Use Case** | **Users** | **Main Benefit** | **Time Savings** |
+|--------------|-----------|------------------|------------------|
+| **🏥 Morning Rounds** | 20 doctors, 4 departments | Simultaneous coordination | 44% reduction |
+| **🚨 Emergency** | 3 doctors, 5 nurses | Automatic alerts | 75% response |
+| **🔬 Labs** | Endocrinologists | AI analysis + charts | 60% review |
+| **📝 Documentation** | General practice | Voice transcription | 80% writing |
+
+### Visual Flow - Hospital ROI
 
 ```
 ┌─────────────────────────────────────┐
-│ 💰 IMPACTO FINANCEIRO ANUAL         │
+│ 💰 ANNUAL FINANCIAL IMPACT          │
 ├─────────────────────────────────────┤
 │                                     │
-│ 💸 CUSTOS REDUZIDOS:                │
-│  ├─► ⏱️ Tempo Médicos: R$ 180k      │
-│  ├─► 📋 Documentação: R$ 95k        │
-│  ├─► 🔔 Coordenação: R$ 65k         │
-│  └─► ⚠️ Erros Evitados: R$ 120k     │
+│ 💸 REDUCED COSTS:                   │
+│  ├─► ⏱️ Doctor Time: $180k          │
+│  ├─► 📋 Documentation: $95k         │
+│  ├─► 🔔 Coordination: $65k          │
+│  └─► ⚠️ Errors Avoided: $120k       │
 │                                     │
-│  = 💰 ECONOMIA TOTAL: R$ 460k       │
+│  = 💰 TOTAL SAVINGS: $460k          │
 │                                     │
-│ 📈 BENEFÍCIOS ADICIONAIS:           │
-│  ├─► 👨‍⚕️ Satisfação Médicos +15%    │
-│  ├─► 🎯 Precisão Diagnóstica +12%   │
-│  └─► ⚡ Resposta Emergência +75%    │
+│ 📈 ADDITIONAL BENEFITS:             │
+│  ├─► 👨‍⚕️ Doctor Satisfaction +15%    │
+│  ├─► 🎯 Diagnostic Accuracy +12%    │
+│  └─► ⚡ Emergency Response +75%      │
 │                                     │
-│ 🎯 ROI: 23% redução custos          │
+│ 🎯 ROI: 23% cost reduction          │
 │                                     │
 └─────────────────────────────────────┘
 ```
 
-Casos de uso com identidade ASCII visual consistente e fluxos práticos para Hospital Real Português! 🏥✨
+Use cases with consistent ASCII visual identity and practical workflows for Real Portuguese Hospital! 🏥✨ 
