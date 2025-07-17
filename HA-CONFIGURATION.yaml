@@ -1,0 +1,644 @@
+# ============================================================================
+# High Availability Configuration for Medical Record Platform
+# Dual Mac Studio M3 Ultra + GCP Emergency Fallback
+# ============================================================================
+
+# HAProxy Load Balancer Configuration
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: haproxy-ha-config
+  namespace: medical-ha
+  labels:
+    app: medical-platform
+    component: load-balancer
+    tier: infrastructure
+data:
+  haproxy.cfg: |
+    global
+        daemon
+        log stdout local0 info
+        chroot /var/lib/haproxy
+        stats socket /run/haproxy/admin.sock mode 660 level admin
+        stats timeout 30s
+        user haproxy
+        group haproxy
+        
+    defaults
+        mode http
+        timeout connect 5000ms
+        timeout client 50000ms
+        timeout server 50000ms
+        timeout http-request 10s
+        timeout http-keep-alive 2s
+        timeout check 2s
+        option httplog
+        option dontlognull
+        option http-server-close
+        option forwardfor except 127.0.0.0/8
+        option redispatch
+        retries 3
+        
+    # Health check endpoint
+    listen health_check
+        bind *:8080
+        mode http
+        http-request return status 200 content-type text/plain string "HA-PROXY-OK"
+        
+    # Statistics endpoint (internal only)
+    listen stats
+        bind 192.168.100.100:9000
+        mode http
+        stats enable
+        stats uri /stats
+        stats refresh 30s
+        stats admin if TRUE
+        
+    # Medical API Load Balancing Frontend
+    frontend medical_api_frontend
+        bind *:443 ssl crt /etc/ssl/certs/hospital.pem
+        bind *:80
+        redirect scheme https if !{ ssl_fc }
+        
+        # Security headers
+        http-response add-header Strict-Transport-Security "max-age=31536000; includeSubDomains"
+        http-response add-header X-Content-Type-Options "nosniff"
+        http-response add-header X-Frame-Options "DENY"
+        http-response add-header X-XSS-Protection "1; mode=block"
+        
+        # Rate limiting
+        stick-table type ip size 100k expire 30s store http_req_rate(10s)
+        http-request track-sc0 src
+        http-request reject if { sc_http_req_rate(0) gt 20 }
+        
+        default_backend mac_studio_backend
+        
+    backend mac_studio_backend
+        balance roundrobin
+        option httpchk GET /health
+        http-check expect status 200
+        
+        # Primary Mac Studio M3 Ultra
+        server primary_mac_studio 192.168.100.10:8080 check inter 5s fall 3 rise 2 weight 100 maxconn 100
+        
+        # Secondary Mac Studio M3 Ultra (Hot Standby)
+        server secondary_mac_studio 192.168.100.11:8080 check inter 5s fall 3 rise 2 weight 90 backup maxconn 100
+        
+        # GCP Emergency Fallback (Last Resort)
+        server gcp_emergency emergency-medical.gcp.realhospital.com:443 check inter 10s fall 5 rise 3 weight 10 backup maxconn 50 ssl verify none
+
+---
+# HAProxy Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: haproxy-ha
+  namespace: medical-ha
+  labels:
+    app: medical-platform
+    component: load-balancer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: medical-platform
+      component: load-balancer
+  template:
+    metadata:
+      labels:
+        app: medical-platform
+        component: load-balancer
+    spec:
+      containers:
+      - name: haproxy
+        image: haproxy:2.8-alpine
+        ports:
+        - containerPort: 80
+          name: http
+        - containerPort: 443
+          name: https
+        - containerPort: 8080
+          name: health
+        - containerPort: 9000
+          name: stats
+        volumeMounts:
+        - name: haproxy-config
+          mountPath: /usr/local/etc/haproxy/haproxy.cfg
+          subPath: haproxy.cfg
+        - name: ssl-certs
+          mountPath: /etc/ssl/certs
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+      volumes:
+      - name: haproxy-config
+        configMap:
+          name: haproxy-ha-config
+      - name: ssl-certs
+        secret:
+          secretName: hospital-ssl-certs
+
+---
+# HAProxy Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: medical-api-loadbalancer
+  namespace: medical-ha
+  labels:
+    app: medical-platform
+    component: load-balancer
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 192.168.100.100
+  ports:
+  - port: 80
+    targetPort: 80
+    name: http
+  - port: 443
+    targetPort: 443
+    name: https
+  selector:
+    app: medical-platform
+    component: load-balancer
+
+---
+# PostgreSQL High Availability Cluster
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgresql-ha-cluster
+  namespace: medical-data
+  labels:
+    app: medical-platform
+    component: database
+spec:
+  instances: 2
+  imageName: postgres:15-alpine
+  
+  postgresql:
+    parameters:
+      # Replication settings
+      wal_level: replica
+      hot_standby: "on"
+      max_wal_senders: "3"
+      synchronous_commit: "on"
+      synchronous_standby_names: "*"
+      
+      # Performance settings
+      shared_buffers: "1GB"
+      effective_cache_size: "4GB"
+      work_mem: "64MB"
+      maintenance_work_mem: "512MB"
+      
+      # Logging settings
+      log_statement: "all"
+      log_duration: "on"
+      log_min_duration_statement: "1000"
+      
+  bootstrap:
+    initdb:
+      database: medical_records
+      owner: medical_user
+      secret:
+        name: postgresql-credentials
+        
+  storage:
+    size: 4Ti
+    storageClass: local-ssd
+    
+  monitoring:
+    enabled: true
+    
+  backup:
+    target: prefer-standby
+    schedule: "0 2 * * *"
+    
+  # Automatic failover configuration
+  failoverDelay: 30
+  switchoverDelay: 60
+
+---
+# Redis High Availability Configuration
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redis-ha-config
+  namespace: medical-cache
+data:
+  redis.conf: |
+    # Redis HA Configuration
+    bind 0.0.0.0
+    port 6379
+    protected-mode no
+    
+    # Persistence
+    save 900 1
+    save 300 10
+    save 60 10000
+    
+    # Security
+    requirepass $REDIS_PASSWORD
+    
+    # Replication
+    replica-read-only yes
+    replica-serve-stale-data yes
+    
+    # Memory management
+    maxmemory 2gb
+    maxmemory-policy allkeys-lru
+    
+    # Logging
+    loglevel notice
+    
+  sentinel.conf: |
+    # Redis Sentinel Configuration
+    bind 0.0.0.0
+    port 26379
+    
+    sentinel monitor medical-redis 192.168.100.10 6379 2
+    sentinel auth-pass medical-redis $REDIS_PASSWORD
+    sentinel down-after-milliseconds medical-redis 5000
+    sentinel failover-timeout medical-redis 30000
+    sentinel parallel-syncs medical-redis 1
+
+---
+# GCP Emergency Fallback Configuration
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gcp-fallback-config
+  namespace: medical-emergency
+data:
+  fallback-config.yaml: |
+    gcp_fallback:
+      trigger_conditions:
+        - both_mac_studios_down
+        - primary_site_unavailable
+        - disaster_recovery_activation
+        
+      services:
+        gke_cluster:
+          name: "medical-emergency-cluster"
+          location: "southamerica-east1"
+          node_pools:
+            - name: "emergency-ai-pool"
+              machine_type: "g2-standard-4"
+              accelerator_type: "nvidia-l4"
+              accelerator_count: 1
+              initial_node_count: 2
+              max_node_count: 5
+              
+        cloud_sql:
+          instance_name: "medical-emergency-db"
+          database_version: "POSTGRES_15"
+          tier: "db-standard-4"
+          region: "southamerica-east1"
+          backup_enabled: true
+          
+        cloud_storage:
+          bucket_name: "medical-emergency-storage"
+          storage_class: "REGIONAL"
+          location: "southamerica-east1"
+          
+      limitations:
+        functionality_percentage: 25
+        max_concurrent_users: 50
+        available_features:
+          - "basic_medical_chat"
+          - "emergency_patient_lookup"
+          - "critical_alerts_only"
+          - "emergency_prescriptions"
+        
+      monitoring:
+        health_check_interval: "30s"
+        fallback_activation_threshold: "3_consecutive_failures"
+        recovery_detection_interval: "10s"
+
+---
+# Prometheus Monitoring Configuration for HA
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: medical-ha-monitoring
+  namespace: medical-monitoring
+spec:
+  groups:
+  - name: high_availability_alerts
+    rules:
+    
+    # Mac Studio Health Monitoring
+    - alert: MacStudioPrimaryDown
+      expr: up{job="mac-studio-primary"} == 0
+      for: 30s
+      labels:
+        severity: critical
+        service: medical-platform
+        component: mac-studio
+      annotations:
+        summary: "Primary Mac Studio is down"
+        description: "Primary Mac Studio has been unreachable for more than 30 seconds"
+        runbook_url: "https://runbook.realhospital.com/mac-studio-failure"
+        
+    - alert: MacStudioSecondaryDown
+      expr: up{job="mac-studio-secondary"} == 0
+      for: 30s
+      labels:
+        severity: warning
+        service: medical-platform
+        component: mac-studio
+      annotations:
+        summary: "Secondary Mac Studio is down"
+        description: "Secondary Mac Studio has been unreachable for more than 30 seconds"
+        
+    - alert: BothMacStudiosDown
+      expr: up{job="mac-studio-primary"} == 0 and up{job="mac-studio-secondary"} == 0
+      for: 10s
+      labels:
+        severity: critical
+        service: medical-platform
+        component: failover
+      annotations:
+        summary: "EMERGENCY: Both Mac Studios are down"
+        description: "Both Mac Studio systems are unavailable - GCP fallback should activate"
+        runbook_url: "https://runbook.realhospital.com/dual-failure-emergency"
+        
+    # Database Replication Monitoring
+    - alert: PostgreSQLReplicationLag
+      expr: postgresql_replication_lag_seconds > 10
+      for: 1m
+      labels:
+        severity: warning
+        service: database
+        component: replication
+      annotations:
+        summary: "PostgreSQL replication lag is high"
+        description: "Replication lag is {{ $value }} seconds"
+        
+    - alert: PostgreSQLReplicaDown
+      expr: up{job="postgresql-replica"} == 0
+      for: 1m
+      labels:
+        severity: warning
+        service: database
+        component: replication
+      annotations:
+        summary: "PostgreSQL replica is down"
+        description: "PostgreSQL replica has been down for more than 1 minute"
+        
+    # Load Balancer Monitoring
+    - alert: HAProxyDown
+      expr: up{job="haproxy"} == 0
+      for: 30s
+      labels:
+        severity: critical
+        service: load-balancer
+        component: haproxy
+      annotations:
+        summary: "HAProxy load balancer is down"
+        description: "HAProxy has been unreachable for more than 30 seconds"
+        
+    - alert: HighLatency
+      expr: histogram_quantile(0.95, rate(haproxy_http_request_duration_seconds_bucket[5m])) > 0.5
+      for: 2m
+      labels:
+        severity: warning
+        service: medical-platform
+        component: performance
+      annotations:
+        summary: "High latency detected"
+        description: "95th percentile latency is {{ $value }} seconds"
+        
+    # GCP Fallback Monitoring
+    - alert: GCPFallbackActivated
+      expr: gcp_fallback_active == 1
+      for: 0s
+      labels:
+        severity: critical
+        service: emergency-fallback
+        component: gcp
+      annotations:
+        summary: "GCP Emergency Fallback Activated"
+        description: "Emergency fallback to GCP has been activated due to primary system failure"
+        
+    - alert: GCPFallbackDegraded
+      expr: gcp_fallback_functionality_percentage < 25
+      for: 1m
+      labels:
+        severity: warning
+        service: emergency-fallback
+        component: gcp
+      annotations:
+        summary: "GCP fallback functionality degraded"
+        description: "GCP fallback is operating at {{ $value }}% functionality"
+
+---
+# Emergency Failover Script ConfigMap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: emergency-failover-scripts
+  namespace: medical-ha
+data:
+  failover.sh: |
+    #!/bin/bash
+    # Emergency Failover Script for Medical Record Platform
+    
+    set -euo pipefail
+    
+    TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
+    LOG_FILE="/var/log/medical/failover.log"
+    
+    log() {
+        echo "[$TIMESTAMP] $1" | tee -a $LOG_FILE
+    }
+    
+    check_primary() {
+        if curl -sf http://192.168.100.10:8080/health >/dev/null 2>&1; then
+            return 0
+        else
+            return 1
+        fi
+    }
+    
+    check_secondary() {
+        if curl -sf http://192.168.100.11:8080/health >/dev/null 2>&1; then
+            return 0
+        else
+            return 1
+        fi
+    }
+    
+    activate_gcp_fallback() {
+        log "EMERGENCY: Activating GCP fallback services"
+        
+        # Notify hospital staff
+        curl -X POST -H "Content-Type: application/json" \
+             -d '{"text":"🚨 EMERGENCY: Both Mac Studios down. GCP fallback activated. Limited functionality available."}' \
+             $SLACK_WEBHOOK_URL
+        
+        # Activate GCP emergency cluster
+        gcloud container clusters resize medical-emergency-cluster \
+            --num-nodes=2 --zone=southamerica-east1-a --quiet
+        
+        # Update DNS to point to GCP emergency services
+        kubectl patch service medical-api-loadbalancer \
+            -p '{"spec":{"type":"ExternalName","externalName":"emergency-medical.gcp.realhospital.com"}}'
+        
+        log "GCP fallback activation completed"
+    }
+    
+    main() {
+        log "Starting failover health check"
+        
+        if ! check_primary && ! check_secondary; then
+            log "CRITICAL: Both Mac Studios are down!"
+            activate_gcp_fallback
+        elif ! check_primary; then
+            log "WARNING: Primary Mac Studio is down, secondary is active"
+        elif ! check_secondary; then
+            log "WARNING: Secondary Mac Studio is down, primary is active"
+        else
+            log "INFO: Both Mac Studios are healthy"
+        fi
+    }
+    
+    main "$@"
+    
+  recovery.sh: |
+    #!/bin/bash
+    # Recovery Script for Medical Record Platform
+    
+    set -euo pipefail
+    
+    TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
+    LOG_FILE="/var/log/medical/recovery.log"
+    
+    log() {
+        echo "[$TIMESTAMP] $1" | tee -a $LOG_FILE
+    }
+    
+    deactivate_gcp_fallback() {
+        log "INFO: Deactivating GCP fallback - local systems recovered"
+        
+        # Scale down GCP emergency cluster
+        gcloud container clusters resize medical-emergency-cluster \
+            --num-nodes=0 --zone=southamerica-east1-a --quiet
+        
+        # Restore DNS to local load balancer
+        kubectl patch service medical-api-loadbalancer \
+            -p '{"spec":{"type":"LoadBalancer","loadBalancerIP":"192.168.100.100"}}'
+        
+        # Notify staff of recovery
+        curl -X POST -H "Content-Type: application/json" \
+             -d '{"text":"✅ RECOVERY: Local Mac Studio systems restored. Full functionality available."}' \
+             $SLACK_WEBHOOK_URL
+        
+        log "GCP fallback deactivation completed"
+    }
+    
+    main() {
+        log "Starting recovery check"
+        
+        if check_primary || check_secondary; then
+            if [ "$(kubectl get configmap gcp-fallback-status -o jsonpath='{.data.active}')" = "true" ]; then
+                deactivate_gcp_fallback
+            fi
+        fi
+    }
+    
+    main "$@"
+
+---
+# CronJob for Regular Health Checks
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ha-health-check
+  namespace: medical-ha
+spec:
+  schedule: "*/1 * * * *"  # Every minute
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: health-checker
+            image: curlimages/curl:latest
+            command:
+            - /bin/sh
+            - -c
+            - |
+              # Check all components and update status
+              kubectl create configmap health-status \
+                --from-literal=timestamp="$(date)" \
+                --from-literal=primary="$(curl -sf http://192.168.100.10:8080/health && echo 'healthy' || echo 'unhealthy')" \
+                --from-literal=secondary="$(curl -sf http://192.168.100.11:8080/health && echo 'healthy' || echo 'unhealthy')" \
+                --dry-run=client -o yaml | kubectl apply -f -
+          restartPolicy: OnFailure
+
+---
+# Network Policy for HA Security
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: medical-ha-network-policy
+  namespace: medical-ha
+spec:
+  podSelector:
+    matchLabels:
+      app: medical-platform
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: medical-production
+    - podSelector:
+        matchLabels:
+          app: medical-platform
+    ports:
+    - protocol: TCP
+      port: 80
+    - protocol: TCP
+      port: 443
+    - protocol: TCP
+      port: 8080
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          name: medical-data
+    ports:
+    - protocol: TCP
+      port: 5432
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          name: medical-cache
+    ports:
+    - protocol: TCP
+      port: 6379
+  - to: []  # Allow DNS
+    ports:
+    - protocol: UDP
+      port: 53 
