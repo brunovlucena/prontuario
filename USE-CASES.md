@@ -17,7 +17,7 @@ This section outlines comprehensive use cases for the Medical Record MVP platfor
 
 ### Visual Interface - Department Selection (07:00)
 
-```
+```sh
 ┌─────────────────────────────────────┐
 │ 🏥 Real Portuguese Hospital   07:00 │ ← 20 doctors logging in
 ├─────────────────────────────────────┤
@@ -53,7 +53,7 @@ This section outlines comprehensive use cases for the Medical Record MVP platfor
 
 ### Interface - Cardiology List (Dr. Santos)
 
-```
+```sh
 ┌─────────────────────────────────────┐
 │ ← ❤️ Cardiology              07:15  │
 ├─────────────────────────────────────┤
@@ -92,7 +92,7 @@ This section outlines comprehensive use cases for the Medical Record MVP platfor
 
 ### Visual Flow - Morning Rounds
 
-```
+```sh
 ┌─────────────────────────────────────┐
 │ 🔄 MORNING ROUNDS FLOW (07:00)      │
 ├─────────────────────────────────────┤
@@ -130,7 +130,7 @@ This section outlines comprehensive use cases for the Medical Record MVP platfor
 
 ### Visual Interface - Critical Emergency
 
-```
+```sh
 ┌─────────────────────────────────────┐
 │ 🚨 EMERGENCY - Trauma Room 3        │
 ├─────────────────────────────────────┤
@@ -159,7 +159,7 @@ This section outlines comprehensive use cases for the Medical Record MVP platfor
 
 ### Interface - Inter-Departmental Alerts
 
-```
+```sh
 ┌─────────────────────────────────────┐
 │ 🔔 CRITICAL ALERT            07:24  │
 ├─────────────────────────────────────┤
@@ -370,7 +370,7 @@ This section outlines comprehensive use cases for the Medical Record MVP platfor
 
 ### Visual Interface - Voice Documentation
 
-```
+```sh
 ┌─────────────────────────────────────┐
 │ ← Ana Silva, 28y             📝     │
 ├─────────────────────────────────────┤
@@ -402,7 +402,7 @@ This section outlines comprehensive use cases for the Medical Record MVP platfor
 
 ### Interface - Final Structured Medical Note
 
-```
+```sh
 ┌─────────────────────────────────────┐
 │ 📋 MEDICAL NOTE - Ana Silva         │
 ├─────────────────────────────────────┤
@@ -450,7 +450,7 @@ This section outlines comprehensive use cases for the Medical Record MVP platfor
 
 ### Visual Flow - Documentation
 
-```
+```sh
 ┌─────────────────────────────────────┐
 │ 📝 CONSULTATION DOCUMENTATION FLOW  │
 ├─────────────────────────────────────┤
@@ -504,7 +504,7 @@ This section outlines comprehensive use cases for the Medical Record MVP platfor
 
 ### Visual Flow - Hospital ROI
 
-```
+```sh
 ┌─────────────────────────────────────┐
 │ 💰 ANNUAL FINANCIAL IMPACT          │
 ├─────────────────────────────────────┤
