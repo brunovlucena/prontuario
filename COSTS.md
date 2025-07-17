@@ -96,7 +96,7 @@
 │ 📊 EXPECTED OPERATIONAL IMPACT      │
 ├─────────────────────────────────────┤
 │                                     │
-│ 👨‍⚕️ DOCTORS (200 daily users)       │
+│ 👨‍⚕️ DOCTORS (200 daily users)        │
 │  ├─► 40% more efficient rounds      │
 │  ├─► 80% automated documentation    │
 │  └─► AI-based decisions             │
@@ -116,7 +116,7 @@
 │ 🔮 FUTURE SCALABILITY               │
 │  ├─► Support for 500+ users         │
 │  ├─► New medical AI models          │
-│  └─► Integration with other hospitals│
+│  └─► Integration w/ other hospitals │
 │                                     │
 └─────────────────────────────────────┘
 ```
@@ -154,7 +154,7 @@
 │                                     │
 │ 🎯 PHASE 4: Optimization (ongoing)  │
 │  ├─► AI model fine-tuning           │
-│  ├─► Department expansion            │
+│  ├─► Department expansion           │
 │  └─► Legacy system integration      │
 │                                     │
 └─────────────────────────────────────┘
@@ -187,23 +187,23 @@ Based on requirements analysis for 27B models and 200 simultaneous users:
 
 ```
 ┌─────────────────────────────────────────┐
-│ 🏥 MAC STUDIO M3 ULTRA (SINGLE NODE)   │
+│ 🏥 MAC STUDIO M3 ULTRA (SINGLE NODE)    │
 │                                         │
-│ 📊 Technical Specifications:           │
-│ • CPU: 32-core (24P+8E)               │
-│ • GPU: 80-core unified               │
-│ • Memory: 512GB unified              │
-│ • Bandwidth: 819GB/s                 │
-│ • Neural Engine: 32-core, 36 TOPS    │
-│                                       │
-│ 🤖 AI Capacity:                      │
-│ • MedGemma 27B: Full support         │
-│ • 200 simultaneous users             │
-│ • 15-20 tokens/second                │
-│ • Latency <100ms                     │
-│                                       │
-│ 💰 Total Cost: $75,000               │
-│ ⚡ Power: 180W maximum                │
+│ 📊 Technical Specifications:            │
+│ • CPU: 32-core (24P+8E)                 │
+│ • GPU: 80-core unified                  │
+│ • Memory: 512GB unified                 │
+│ • Bandwidth: 819GB/s                    │
+│ • Neural Engine: 32-core, 36 TOPS       │
+│                                         │
+│ 🤖 AI Capacity:                         │
+│ • MedGemma 27B: Full support            │
+│ • 200 simultaneous users                │
+│ • 15-20 tokens/second                   │
+│ • Latency <100ms                        │
+│                                         │
+│ 💰 Total Cost: $75,000                  │
+│ ⚡ Power: 180W maximum                   │
 └─────────────────────────────────────────┘
 ```
 
@@ -252,20 +252,20 @@ Based on requirements analysis for 27B models and 200 simultaneous users:
 
 ```
 ┌─────────────────────────────────────────────┐
-│ 💸 COST DIFFERENCE (3 YEARS)               │
+│ 💸 COST DIFFERENCE (3 YEARS)                │
 ├─────────────────────────────────────────────┤
 │                                             │
-│ GCP Total (3 years): $47,772,000           │
-│ M3 Ultra Total (3 years): $244,000         │
+│ GCP Total (3 years): $47,772,000            │
+│ M3 Ultra Total (3 years): $244,000          │
 │                                             │
-│ 🏆 M3 ULTRA SAVINGS:                       │
-│ ├─► $47,528,000 in 3 years                │
-│ ├─► $1,317,444/month savings               │
-│ └─► 99.5% cost reduction                   │
+│ 🏆 M3 ULTRA SAVINGS:                        │
+│ ├─► $47,528,000 in 3 years                  │
+│ ├─► $1,317,444/month savings                │
+│ └─► 99.5% cost reduction                    │
 │                                             │
-│ ⚡ BREAK-EVEN:                              │
-│ ├─► M3 Ultra pays for itself in: 2 GCP hrs │
-│ ├─► ROI: 19,480% in 3 years               │
+│ ⚡ BREAK-EVEN:                               │
+│ ├─► M3 Ultra pays for itself in: 2 GCP hrs  │
+│ ├─► ROI: 19,480% in 3 years                 │
 │ └─► Payback: Immediate                      │
 │                                             │
 └─────────────────────────────────────────────┘
@@ -286,28 +286,28 @@ Based on requirements analysis for 27B models and 200 simultaneous users:
 
 ```
 ┌─────────────────────────────────────────────┐
-│ ✅ STRATEGIC DECISION: M3 ULTRA            │
+│ ✅ STRATEGIC DECISION: M3 ULTRA             │
 ├─────────────────────────────────────────────┤
 │                                             │
-│ 💰 FINANCIAL JUSTIFICATION:                │
-│  ├─► $47M savings in 3 years              │
-│  ├─► Optimized hospital budget             │
-│  └─► Capital free for other investments    │
+│ 💰 FINANCIAL JUSTIFICATION:                 │
+│  ├─► $47M savings in 3 years                │
+│  ├─► Optimized hospital budget              │
+│  └─► Capital free for other investments     │
 │                                             │
-│ 🏥 MEDICAL JUSTIFICATION:                  │
-│  ├─► Ultra-low latency (<10ms)            │
-│  ├─► Medical data never leaves hospital    │
-│  └─► Superior performance for medical AI   │
+│ 🏥 MEDICAL JUSTIFICATION:                   │
+│  ├─► Ultra-low latency (<10ms)              │
+│  ├─► Medical data never leaves hospital     │
+│  └─► Superior performance for medical AI    │
 │                                             │
-│ 🔒 SECURITY JUSTIFICATION:                 │
-│  ├─► 100% LGPD compliance                 │
-│  ├─► Zero risk of data leakage            │
-│  └─► Total control over medical AI        │
+│ 🔒 SECURITY JUSTIFICATION:                  │
+│  ├─► 100% LGPD compliance                   │
+│  ├─► Zero risk of data leakage              │
+│  └─► Total control over medical AI          │
 │                                             │
-│ 🚀 TECHNICAL JUSTIFICATION:                │
-│  ├─► Local MedGemma 27B                   │
-│  ├─► 512GB RAM for large models           │
-│  └─► Integrated Apple ecosystem           │
+│ 🚀 TECHNICAL JUSTIFICATION:                 │
+│  ├─► Local MedGemma 27B                     │
+│  ├─► 512GB RAM for large models             │
+│  └─► Integrated Apple ecosystem             │
 │                                             │
 └─────────────────────────────────────────────┘
 ```
