@@ -1,4 +1,5 @@
 # 🤖 JAMIE - Just Another Medical Intelligence Executive
+
 ## Admin Analytics Chatbot for Real Portuguese Hospital
 
 [![Status](https://img.shields.io/badge/Status-Production%20Ready-success.svg)](https://example.com)

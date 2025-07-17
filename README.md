@@ -12,6 +12,7 @@ Medical Record is a medical AI platform MVP designed for medium to large medical
 - **[ARCHITECTURE.md](./ARCHITECTURE.md)** - Hybrid local/cloud technical architecture
 - **[DESIGN.md](./DESIGN.md)** - Hybrid WhatsApp + Gemini + memOS interface with wireframes
 - **[USE-CASES.md](./USE-CASES.md)** - Use cases and hospital departmental workflows
+- **[MVP.md](./MVP.md)** - MVP
 
 ### **🔐 Security & Authentication**
 
