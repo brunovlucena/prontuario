@@ -13,6 +13,36 @@ Medical Record is a medical AI platform MVP designed for medium to large medical
 - **[DESIGN.md](./DESIGN.md)** - Hybrid WhatsApp + Gemini + memOS interface with wireframes
 - **[USE-CASES.md](./USE-CASES.md)** - Use cases and hospital departmental workflows
 
+### **🔐 Security & Authentication**
+
+- **[AUTH.md](./AUTH.md)** - Authentication and authorization specifications
+- **[SECURITY.md](./SECURITY.md)** - Security framework and protocols
+- **[FACE-AUTH.md](./FACE-AUTH.md)** - Facial recognition authentication system
+- **[LGPD.md](./LGPD.md)** - LGPD compliance and data protection
+
+### **🏥 Clinical Features**
+
+- **[CHAT.md](./CHAT.md)** - Medical chat interface specifications
+- **[VOICE.md](./VOICE.md)** - Voice recognition and documentation
+- **[CAMERAS.md](./CAMERAS.md)** - Medical imaging and camera integration
+- **[PRESCRIPTIONS.md](./PRESCRIPTIONS.md)** - Prescription management system
+
+### **🤖 AI & Technology**
+
+- **[JAMIE.md](./JAMIE.md)** - AI assistant and automation features
+- **[MODELS.md](./MODELS.md)** - AI models and machine learning specifications
+- **[OBSERVABILITY.md](./OBSERVABILITY.md)** - Monitoring and observability framework
+
+### **☁️ Infrastructure & Deployment**
+
+- **[CLOUD.md](./CLOUD.md)** - Cloud infrastructure and deployment
+- **[KUBERNETES.md](./KUBERNETES.md)** - Kubernetes deployment and orchestration
+- **[COSTS.md](./COSTS.md)** - Cost analysis and pricing structure
+
+### **🌍 Localized Documentation**
+
+- **[Portuguese Documentation](./pt-br/)** - Complete documentation in Portuguese
+
 ---
 
 ## 🎯 MVP

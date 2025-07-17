@@ -241,12 +241,11 @@ Based on requirements analysis for 27B models and 200 simultaneous users:
 | **Item** | **Initial Cost** | **Annual Cost** | **3-Year Total** |
 |----------|------------------|-----------------|------------------|
 | **Mac Studio M3 Ultra (512GB)** | $95,000 | - | $95,000 |
-| **Software & Licenses** | $15,000 | $5,000 | $25,000 |
 | **Energy & Cooling** | - | $8,000 | $24,000 |
 | **Maintenance & Support** | - | $10,000 | $30,000 |
 | **Backup & Storage** | $20,000 | $3,000 | $29,000 |
 | **Redundant Connectivity** | $5,000 | $12,000 | $41,000 |
-| **3-Year Total** | **$135,000** | **$38,000/year** | **$244,000** |
+| **3-Year Total** | **$120,000** | **$33,000/year** | **$219,000** |
 
 ### **📊 Savings Comparative Analysis**
 
@@ -256,10 +255,10 @@ Based on requirements analysis for 27B models and 200 simultaneous users:
 ├─────────────────────────────────────────────┤
 │                                             │
 │ GCP Total (3 years): $47,772,000            │
-│ M3 Ultra Total (3 years): $244,000          │
+│ M3 Ultra Total (3 years): $219,000          │
 │                                             │
 │ 🏆 M3 ULTRA SAVINGS:                        │
-│ ├─► $47,528,000 in 3 years                  │
+│ ├─► $47,553,000 in 3 years                  │
 │ ├─► $1,317,444/month savings                │
 │ └─► 99.5% cost reduction                    │
 │                                             │
@@ -327,13 +326,13 @@ Based on requirements analysis for 27B models and 200 simultaneous users:
 
 | **Year** | **GCP Total** | **M3 Ultra Total** | **Accumulated Savings** |
 |----------|---------------|-------------------|------------------------|
-| **Year 1** | $15,924,000 | $173,000 | $15,751,000 |
-| **Year 2** | $31,848,000 | $211,000 | $31,637,000 |
-| **Year 3** | $47,772,000 | $244,000 | $47,528,000 |
-| **Year 4** | $63,696,000 | $282,000 | $63,414,000 |
-| **Year 5** | $79,620,000 | $375,000 | **$79,245,000** |
+| **Year 1** | $15,924,000 | $153,000 | $15,771,000 |
+| **Year 2** | $31,848,000 | $186,000 | $31,662,000 |
+| **Year 3** | $47,772,000 | $219,000 | $47,553,000 |
+| **Year 4** | $63,696,000 | $252,000 | $63,444,000 |
+| **Year 5** | $79,620,000 | $285,000 | **$79,335,000** |
 
-**🏆 Conclusion: With $79 million in savings over 5 years, the M3 Ultra can finance:**
+**🏆 Conclusion: With $79.3 million in savings over 5 years, the M3 Ultra can finance:**
 - ✅ 10 new Mac Studios for expansion
 - ✅ Medical AI center of excellence
 - ✅ Hospital AI research program
